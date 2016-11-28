@@ -1,0 +1,6 @@
+language: go
+notifications:
+  email:
+    recipients: GoNumber1Fan@gmail.com
+    on_success: change
+    on_failure: always
