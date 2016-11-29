@@ -1,22 +1,28 @@
 package game
 
-import . "github.com/go-number-1-fan/tic-tac-toe/marker"
+import . "github.com/go-number-1-fan/tic-tac-toe/board"
 import . "github.com/go-number-1-fan/tic-tac-toe/player"
+import . "github.com/go-number-1-fan/tic-tac-toe/ui"
 
 type Game struct {
+	ui      UI
 	board   Board
 	players []Player
 }
 
-func CreateGame(board Board, player1 Player, player2 Player) Game {
+func CreateGame(ui UI, board Board, player1 Player, player2 Player) Game {
 	game := Game{
+		ui,
 		board,
 		[]Player{player1, player2},
 	}
 	return game
 }
 
-func (game Game) playGame() {
+func (game Game) PlayGame() {
+	for {
+		game = game.takeTurn()
+	}
 }
 
 func (game Game) swapPlayers() Game {
@@ -26,7 +32,8 @@ func (game Game) swapPlayers() Game {
 
 func (game Game) takeTurn() Game {
 	currentPlayer := game.players[0]
-	game.board = game.board.MakeMove(currentPlayer.GetMove(), game.getCurrentPlayerMarker())
+	game.ui.DisplayBoard(game.board)
+	game.board = game.board.MakeMove(currentPlayer.GetMove(game.board), game.getCurrentPlayerMarker())
 	game = game.swapPlayers()
 	return game
 }
