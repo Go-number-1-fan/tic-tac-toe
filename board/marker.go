@@ -1,4 +1,4 @@
-package game
+package board
 
 type Marker string
 
