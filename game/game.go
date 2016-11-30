@@ -42,7 +42,12 @@ func (game Game) takeTurn() Game {
 	switch game.status {
 	case Continue:
 		game = game.swapPlayers()
+	case Tie:
+		game.ui.DisplayBoard(game.board)
+		game.ui.DisplayTieMessage()
 	default:
+		game.ui.DisplayBoard(game.board)
+		game.ui.DisplayWinMessage(currentPlayer.GetMarker())
 	}
 	return game
 }
