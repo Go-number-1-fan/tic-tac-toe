@@ -6,6 +6,10 @@ type MockUI struct {
 	MockUserInput int
 }
 
+func (ui MockUI) DisplayWelcomeMessage() {
+
+}
+
 func (ui MockUI) GetValidMove(board Board) int {
 	return ui.MockUserInput
 }
