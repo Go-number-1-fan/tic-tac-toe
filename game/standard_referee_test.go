@@ -70,3 +70,122 @@ func TestReferee_ReturnsWinP1_IfXWinsHorizontally(t *testing.T) {
 	}
 	assert.Equal(t, WinP1, ref.GetGameStatus(board))
 }
+
+func TestReferee_ReturnsWinP2_IfOWinsHorizontally(t *testing.T) {
+	ref := StandardReferee{}
+	board := Board{
+		O, O, O,
+		E, E, E,
+		E, E, E,
+	}
+	assert.Equal(t, WinP2, ref.GetGameStatus(board))
+}
+
+func TestReferee_ReturnsWinP2_IfOWinsHorizontally_InADifferentRow(t *testing.T) {
+	ref := StandardReferee{}
+	board := Board{
+		E, E, E,
+		E, E, E,
+		O, O, O,
+	}
+	assert.Equal(t, WinP2, ref.GetGameStatus(board))
+}
+
+func TestReferee_ReturnsWinP1_IfXWinsHorizontally_InADifferentRow(t *testing.T) {
+	ref := StandardReferee{}
+	board := Board{
+		E, E, E,
+		E, E, E,
+		X, X, X,
+	}
+	assert.Equal(t, WinP1, ref.GetGameStatus(board))
+}
+
+func TestReferee_ReturnsTheVerticalWinsOfAnEmptyBoard(t *testing.T) {
+	board := Board{
+		E, E, E,
+		E, E, E,
+		E, E, E,
+	}
+
+	expectedWins := []WinableCombination{
+		WinableCombination{E, E, E},
+		WinableCombination{E, E, E},
+		WinableCombination{E, E, E}}
+
+	assert.Equal(t, expectedWins, getVerticalWins(board))
+}
+
+func TestReferee_ReturnsTheVerticalWinsOfABoard(t *testing.T) {
+	board := Board{
+		X, E, X,
+		E, X, E,
+		E, O, O,
+	}
+
+	expectedWins := []WinableCombination{
+		WinableCombination{X, E, E},
+		WinableCombination{E, X, O},
+		WinableCombination{X, E, O}}
+
+	assert.Equal(t, expectedWins, getVerticalWins(board))
+}
+
+func TestReferee_ReturnsWinP1_IfXWinsVertically(t *testing.T) {
+	ref := StandardReferee{}
+	board := Board{
+		X, E, E,
+		X, E, E,
+		X, E, E,
+	}
+	assert.Equal(t, WinP1, ref.GetGameStatus(board))
+}
+
+func TestReferee_ReturnsWinP2_IfOWinsVertically(t *testing.T) {
+	ref := StandardReferee{}
+	board := Board{
+		O, E, E,
+		O, E, E,
+		O, E, E,
+	}
+	assert.Equal(t, WinP2, ref.GetGameStatus(board))
+}
+
+func TestReferee_ReturnsWinP2_IfOWinsVertically_InADifferentRow(t *testing.T) {
+	ref := StandardReferee{}
+	board := Board{
+		E, E, O,
+		E, E, O,
+		E, E, O,
+	}
+	assert.Equal(t, WinP2, ref.GetGameStatus(board))
+}
+
+func TestReferee_ReturnsWinP1_IfXWinsVertically_InADifferentRow(t *testing.T) {
+	ref := StandardReferee{}
+	board := Board{
+		E, E, X,
+		E, E, X,
+		E, E, X,
+	}
+	assert.Equal(t, WinP1, ref.GetGameStatus(board))
+}
+
+func TestReferee_GetsAllTheVerticalAndHorizontalWinningCombinations(t *testing.T) {
+	board := Board{
+		X, O, E,
+		E, X, O,
+		O, E, X,
+	}
+
+	expectedWins := []WinableCombination{
+		WinableCombination{X, O, E},
+		WinableCombination{E, X, O},
+		WinableCombination{O, E, X},
+		WinableCombination{X, E, O},
+		WinableCombination{O, X, E},
+		WinableCombination{E, O, X},
+	}
+
+	assert.Equal(t, expectedWins, getAllWinableCombinations(board))
+}
