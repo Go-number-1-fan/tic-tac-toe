@@ -11,6 +11,14 @@ func (ui ConsoleUI) DisplayWelcomeMessage() {
 	ui.Output.Write(WelcomeMessage)
 }
 
+func (ui ConsoleUI) DisplayTieMessage() {
+	ui.Output.Write(TieMessage)
+}
+
+func (ui ConsoleUI) DisplayWinMessage(winner string) {
+	ui.Output.Write(winner + WinMessage)
+}
+
 func getCharsPerRow(rowLength int) int {
 	charsPerRow := (rowLength * 3) + (rowLength + 1)
 	return charsPerRow
