@@ -8,15 +8,20 @@ type StandardReferee struct{}
 
 func (referee StandardReferee) GetGameStatus(board Board) GameStatus {
 	allWinableCombinations := getAllWinableCombinations(board)
+
 	for _, winableCombination := range allWinableCombinations {
-		switch {
-		case checkWinableCombinationForWin(X, winableCombination):
+		if checkWinableCombinationForWin(X, winableCombination) {
 			return WinP1
-		case checkWinableCombinationForWin(O, winableCombination):
+		} else if checkWinableCombinationForWin(O, winableCombination) {
 			return WinP2
 		}
 	}
-	return Continue
+
+	if len(board.EmptySpots()) == 0 {
+		return Tie
+	} else {
+		return Continue
+	}
 }
 
 func getAllWinableCombinations(board Board) []WinableCombination {
