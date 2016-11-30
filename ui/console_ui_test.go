@@ -1,14 +1,8 @@
 package ui
 
 import "github.com/stretchr/testify/assert"
-import . "github.com/go-number-1-fan/tic-tac-toe/mocks"
 import . "github.com/go-number-1-fan/tic-tac-toe/board"
 import "testing"
-
-func TestConsoleUI_CanGetAnNumberFromTheInput(t *testing.T) {
-	ui := ConsoleUI{MockInput{2}, MockOutput{}}
-	assert.Equal(t, 2, ui.GetValidMove(EmptyBoard()))
-}
 
 func TestConsoleUI_CanGetTheNumberOfCharactersPerRow(t *testing.T) {
 	assert.Equal(t, 13, getCharsPerRow(3))
