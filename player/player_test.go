@@ -2,7 +2,7 @@ package player
 
 import "github.com/stretchr/testify/assert"
 import . "github.com/go-number-1-fan/tic-tac-toe/board"
-import . "github.com/go-number-1-fan/tic-tac-toe/mocks"
+import . "github.com/go-number-1-fan/tic-tac-toe/ui"
 import "testing"
 
 func TestPlayer_CanReturnAValidMove(t *testing.T) {
