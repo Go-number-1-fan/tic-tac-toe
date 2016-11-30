@@ -49,12 +49,18 @@ func getDisplayBoard(board Board) string {
 func (ui ConsoleUI) DisplayBoard(board Board) {
 	ui.Output.Write(getDisplayBoard(board))
 }
-func (ui ConsoleUI) GetValidMove(board Board) int {
-	ui.Output.Write(SelectASpotMessage)
+
+func getHumanSelectMessage(marker string) string {
+	return marker + SelectASpotMessage
+}
+
+func (ui ConsoleUI) GetValidMove(board Board, marker string) int {
+	selectMessage := getHumanSelectMessage(marker)
+	ui.Output.Write(selectMessage)
 	selected := ui.Input.ReadInt()
 	for !board.IsMoveOpen(selected) {
 		ui.Output.Write(MoveNotValidMessage)
-		ui.Output.Write(SelectASpotMessage)
+		ui.Output.Write(selectMessage)
 		selected = ui.Input.ReadInt()
 	}
 	return selected
