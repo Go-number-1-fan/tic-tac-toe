@@ -2,6 +2,7 @@ package ui
 
 import "github.com/stretchr/testify/assert"
 import . "github.com/go-number-1-fan/tic-tac-toe/board"
+import "strings"
 import "testing"
 
 func TestConsoleUI_CanGetTheNumberOfCharactersPerRow(t *testing.T) {
@@ -61,4 +62,10 @@ func TestConsoleUI_CanGetTheDisplayBoardFromAFullBoard(t *testing.T) {
 			" -------------\n" +
 			" | X | X | O | \n"
 	assert.Equal(t, expectedBoard, getDisplayBoard(board))
+}
+
+func TestConsoleUI_CanGetTheHumanSelectMessage(t *testing.T) {
+	assert.True(t, strings.Contains(getHumanSelectMessage("X"), "X"))
+	assert.True(t, strings.Contains(getHumanSelectMessage("O"), "O"))
+	assert.True(t, strings.Contains(getHumanSelectMessage("BLAH"), "BLAH"))
 }
