@@ -15,6 +15,24 @@ func TestBoard_CanMakeAMoveAtAnIndex(t *testing.T) {
 	assert.Equal(t, X, board[0])
 }
 
+func TestBoard_CanGetTheMarkerAtAnIndex(t *testing.T) {
+	board := Board{
+		X, E, E,
+		E, E, E,
+		E, E, E}
+
+	assert.Equal(t, X, board.MarkerAt(0))
+}
+
+func TestBoard_CanGetTheMarkerAtAnotherIndex(t *testing.T) {
+	board := Board{
+		E, E, E,
+		E, E, E,
+		E, O, E}
+
+	assert.Equal(t, O, board.MarkerAt(7))
+}
+
 func TestBoard_CanTellYouIfItsEmptyAtIndex(t *testing.T) {
 	board := EmptyBoard()
 	board = board.MakeMove(0, X)
