@@ -10,7 +10,7 @@ func (ui MockUI) DisplayWelcomeMessage() {
 
 }
 
-func (ui MockUI) GetValidMove(board Board) int {
+func (ui MockUI) GetValidMove(board Board, marker string) int {
 	return ui.MockUserInput
 }
 
