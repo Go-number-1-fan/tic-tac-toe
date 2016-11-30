@@ -23,8 +23,10 @@ func getAllWinableCombinations(board Board) []WinableCombination {
 	var allWinableCombinations []WinableCombination
 	allWinableCombinations = append(allWinableCombinations, getHorizontalWins(board)...)
 	allWinableCombinations = append(allWinableCombinations, getVerticalWins(board)...)
+	allWinableCombinations = append(allWinableCombinations, getDiagonalWins(board)...)
 	return allWinableCombinations
 }
+
 func checkWinableCombinationForWin(marker Marker, winableCombination WinableCombination) bool {
 	for _, winableMarker := range winableCombination {
 		if winableMarker != marker {
@@ -66,4 +68,19 @@ func getVerticalWins(board Board) []WinableCombination {
 		verticalWins = append(verticalWins, verticalWin)
 	}
 	return verticalWins
+}
+
+func getDiagonalWins(board Board) []WinableCombination {
+	rowLength := board.RowLength()
+	horizontalWins := getHorizontalWins(board)
+	var diagonalWins []WinableCombination
+	var diagonalWin1 WinableCombination
+	var diagonalWin2 WinableCombination
+	for start := 0; start < rowLength; start++ {
+		diagonalWin1 = append(diagonalWin1, horizontalWins[start][start])
+		diagonalWin2 = append(diagonalWin2, horizontalWins[start][(rowLength-1)-start])
+	}
+	diagonalWins = append(diagonalWins, diagonalWin1)
+	diagonalWins = append(diagonalWins, diagonalWin2)
+	return diagonalWins
 }
