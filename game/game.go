@@ -20,6 +20,7 @@ func CreateGame(ui UI, board Board, player1 Player, player2 Player) Game {
 }
 
 func (game Game) PlayGame() {
+	game.ui.DisplayWelcomeMessage()
 	for {
 		game = game.takeTurn()
 	}
@@ -33,7 +34,8 @@ func (game Game) swapPlayers() Game {
 func (game Game) takeTurn() Game {
 	currentPlayer := game.players[0]
 	game.ui.DisplayBoard(game.board)
-	game.board = game.board.MakeMove(currentPlayer.GetMove(game.board), game.getCurrentPlayerMarker())
+	playerMove := currentPlayer.GetMove(game.board, game.ui)
+	game.board = game.board.MakeMove(playerMove, game.getCurrentPlayerMarker())
 	game = game.swapPlayers()
 	return game
 }
