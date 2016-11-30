@@ -6,11 +6,11 @@ import . "github.com/go-number-1-fan/tic-tac-toe/mocks"
 import "testing"
 
 func TestPlayer_CanReturnAValidMove(t *testing.T) {
-	player := HumanPlayer{X, MockUI{2}}
-	assert.Equal(t, player.GetMove(EmptyBoard()), 2)
+	player := HumanPlayer{X}
+	assert.Equal(t, player.GetMove(EmptyBoard(), MockUI{2}), 2)
 }
 
 func TestPlayer_CanReturnAValidMarker(t *testing.T) {
-	player := HumanPlayer{X, MockUI{2}}
+	player := HumanPlayer{X}
 	assert.Equal(t, player.GetMarker(), X)
 }
