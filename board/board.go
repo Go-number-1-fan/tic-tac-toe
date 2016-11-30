@@ -18,6 +18,10 @@ func (board Board) MakeMove(spot int, marker Marker) Board {
 	return board
 }
 
+func (board Board) MarkerAt(spot int) Marker {
+	return board[spot]
+}
+
 func (board Board) emptyAt(spot int) bool {
 	return board[spot] == E
 }

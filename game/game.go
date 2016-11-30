@@ -8,27 +8,27 @@ type Game struct {
 	ui      UI
 	board   Board
 	players []Player
+	referee Referee
+	status  GameStatus
 }
 
-func CreateGame(ui UI, board Board, player1 Player, player2 Player) Game {
+func CreateGame(ui UI, board Board, player1 Player, player2 Player, referee Referee) Game {
+	defaultGameStatus := Continue
 	game := Game{
 		ui,
 		board,
 		[]Player{player1, player2},
+		referee,
+		defaultGameStatus,
 	}
 	return game
 }
 
 func (game Game) PlayGame() {
 	game.ui.DisplayWelcomeMessage()
-	for {
+	for game.status == Continue {
 		game = game.takeTurn()
 	}
-}
-
-func (game Game) swapPlayers() Game {
-	game.players[0], game.players[1] = game.players[1], game.players[0]
-	return game
 }
 
 func (game Game) takeTurn() Game {
@@ -36,7 +36,19 @@ func (game Game) takeTurn() Game {
 	game.ui.DisplayBoard(game.board)
 	playerMove := currentPlayer.GetMove(game.board, game.ui)
 	game.board = game.board.MakeMove(playerMove, game.getCurrentPlayerMarker())
-	game = game.swapPlayers()
+
+	game.status = game.referee.GetGameStatus(game.board)
+
+	switch game.status {
+	case Continue:
+		game = game.swapPlayers()
+	default:
+	}
+	return game
+}
+
+func (game Game) swapPlayers() Game {
+	game.players[0], game.players[1] = game.players[1], game.players[0]
 	return game
 }
 
