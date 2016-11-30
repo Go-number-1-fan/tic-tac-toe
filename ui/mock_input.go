@@ -1,4 +1,4 @@
-package mocks
+package ui
 
 type MockInput struct {
 	MockConsoleInput int
