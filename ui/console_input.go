@@ -32,7 +32,7 @@ func (input ConsoleInput) ReadInt() int {
 		number, hasParseError = convertStringToInt(line)
 		hasError = hasReadError || hasParseError
 		if hasError {
-			fmt.Println("Please enter a valid integer: ")
+			fmt.Println(NotANumberMessage)
 		}
 	}
 	return number

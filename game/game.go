@@ -20,6 +20,7 @@ func CreateGame(ui UI, board Board, player1 Player, player2 Player) Game {
 }
 
 func (game Game) PlayGame() {
+	game.ui.DisplayWelcomeMessage()
 	for {
 		game = game.takeTurn()
 	}
