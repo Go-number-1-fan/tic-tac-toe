@@ -109,3 +109,19 @@ func TestGame_CanGetTheCurrentPlayersMarker_ForO(t *testing.T) {
 
 	assert.Equal(t, O, game.getCurrentPlayerMarker())
 }
+
+// Computer Test
+
+func TestGame_CanTakeATurnWithAComputer(t *testing.T) {
+	board := Board{
+		X, O, X,
+		X, O, E,
+		O, X, E,
+	}
+	firstPlayer := MockPlayer{"X", 5}
+	secondPlayer := ComputerPlayer{"O"}
+
+	game := CreateGame(MockUI{1}, board, secondPlayer, firstPlayer, StandardReferee{})
+	updatedGame := game.takeTurn()
+	assert.True(t, updatedGame.board[5] == O || updatedGame.board[8] == O)
+}
