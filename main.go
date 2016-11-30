@@ -7,6 +7,6 @@ import . "github.com/go-number-1-fan/tic-tac-toe/player"
 
 func main() {
 	ui := ConsoleUI{ConsoleInput{}, ConsoleOutput{}}
-	game := CreateGame(ui, EmptyBoard(), HumanPlayer{"X"}, HumanPlayer{"O"}, StandardReferee{})
+	game := CreateGame(ui, EmptyBoard(), HumanPlayer{"X"}, ComputerPlayer{"O"}, StandardReferee{})
 	game.PlayGame()
 }
