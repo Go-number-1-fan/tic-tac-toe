@@ -242,6 +242,28 @@ func TestReferee_ReturnsContinueIfNoWin(t *testing.T) {
 	assert.Equal(t, Continue, ref.GetGameStatus(board))
 }
 
+func TestReferee_ReturnsTieIfBoardIsFull(t *testing.T) {
+	ref := StandardReferee{}
+	board := Board{
+		X, O, O,
+		O, X, X,
+		O, X, O,
+	}
+
+	assert.Equal(t, Tie, ref.GetGameStatus(board))
+}
+
+func TestReferee_ReturnsP1WinIfBoardIsFullAndXWins(t *testing.T) {
+	ref := StandardReferee{}
+	board := Board{
+		X, O, O,
+		O, X, X,
+		O, X, X,
+	}
+
+	assert.Equal(t, WinP1, ref.GetGameStatus(board))
+}
+
 func TestReferee_GetsAllWinningCombinations(t *testing.T) {
 	board := Board{
 		X, O, E,
