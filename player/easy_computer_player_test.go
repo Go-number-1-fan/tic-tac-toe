@@ -6,7 +6,7 @@ import . "github.com/go-number-1-fan/tic-tac-toe/ui"
 import "testing"
 
 func TestEasyComputerPlayer_CanReturnAValidMove(t *testing.T) {
-	player := EasyComputerPlayer{"X"}
+	player := EasyComputerPlayer{"X", "Computer"}
 	board := Board{
 		X, O, X,
 		X, O, O,
@@ -15,7 +15,7 @@ func TestEasyComputerPlayer_CanReturnAValidMove(t *testing.T) {
 }
 
 func TestEasyComputerPlayer_CanReturnAnotherValidMove(t *testing.T) {
-	player := EasyComputerPlayer{"X"}
+	player := EasyComputerPlayer{"X", "Computer"}
 	board := Board{
 		X, O, X,
 		X, O, O,
@@ -24,6 +24,6 @@ func TestEasyComputerPlayer_CanReturnAnotherValidMove(t *testing.T) {
 }
 
 func TestEasyComputerPlayer_CanReturnAValidMarker(t *testing.T) {
-	player := EasyComputerPlayer{"X"}
-	assert.Equal(t, player.GetMarker(), "X")
+	player := EasyComputerPlayer{"X", "Computer"}
+	assert.Equal(t, player.GetMarker(), "X", "Computer")
 }

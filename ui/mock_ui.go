@@ -8,7 +8,7 @@ type MockUI struct {
 
 func (ui MockUI) DisplayWelcomeMessage() {}
 
-func (ui MockUI) DisplayComputerThinkingMessage() {}
+func (ui MockUI) DisplayComputerThinkingMessage(computerName string) {}
 
 func (ui MockUI) GetValidMove(board Board, marker string) int {
 	return ui.MockUserInput
@@ -22,4 +22,8 @@ func (ui MockUI) DisplayWinMessage(winner string) {}
 
 func (ui MockUI) GetPlayerTypeSelection(playerName string) PlayerTypeSelection {
 	return PlayerTypeSelection(ui.MockUserInput)
+}
+
+func (ui MockUI) GetPlayerNameSelection(playerNumber string) string {
+	return "Player" + playerNumber
 }

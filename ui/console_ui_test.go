@@ -69,3 +69,31 @@ func TestConsoleUI_CanGetTheHumanSelectMessage(t *testing.T) {
 	assert.True(t, strings.Contains(getHumanSelectMessage("O"), "O"))
 	assert.True(t, strings.Contains(getHumanSelectMessage("BLAH"), "BLAH"))
 }
+
+func ExampleWelcomeMessage() {
+	ui := ConsoleUI{MockInput{0, ""}, ConsoleOutput{}, ConsoleInputValidator{}}
+	ui.DisplayWelcomeMessage()
+	// Output:
+	//Welcome To Tic Tac Toe!
+	//Follow the instructions and enter requested information when prompted!
+	//
+	//Most Importantly... Have fun!
+}
+
+func ExampleGetPlayerTypeSelection() {
+	ui := ConsoleUI{MockInput{2, ""}, ConsoleOutput{}, ConsoleInputValidator{}}
+	ui.GetPlayerTypeSelection("Player1")
+	// Output:
+	//	Player1
+	//Please Select a Player Type:
+	//	1. Human Player
+	//	2. Easy Computer Player
+	//	3. Hard Computer Player
+}
+
+func ExampleGetPlayerNameSelection() {
+	ui := ConsoleUI{MockInput{2, "Player1"}, ConsoleOutput{}, ConsoleInputValidator{}}
+	ui.GetPlayerNameSelection("1")
+	// Output:
+	//Please Select a Name for Player1:
+}

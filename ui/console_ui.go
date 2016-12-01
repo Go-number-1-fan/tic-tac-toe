@@ -21,8 +21,8 @@ func (ui ConsoleUI) DisplayTieMessage() {
 	ui.Output.Write(TieMessage)
 }
 
-func (ui ConsoleUI) DisplayComputerThinkingMessage() {
-	ui.Output.Write(ComputerThinkingMessage)
+func (ui ConsoleUI) DisplayComputerThinkingMessage(computerName string) {
+	ui.Output.Write(computerName + ComputerThinkingMessage)
 	time.Sleep(2 * time.Second)
 }
 
@@ -86,7 +86,7 @@ func (ui ConsoleUI) GetValidMove(board Board, marker string) int {
 }
 
 func (ui ConsoleUI) GetPlayerTypeSelection(playerName string) PlayerTypeSelection {
-	ui.Output.Write(NewLineString + playerName + NewLineString)
+	ui.Output.Write(NewLineString + NewLineString + playerName + NewLineString)
 	ui.Output.Write(PlayerTypeSelectMessage)
 	selected := ui.Input.ReadInt()
 	for !ui.Validator.IsValid(selected, []int{1, 2, 3}) {
@@ -95,4 +95,11 @@ func (ui ConsoleUI) GetPlayerTypeSelection(playerName string) PlayerTypeSelectio
 		selected = ui.Input.ReadInt()
 	}
 	return PlayerTypeSelection(selected)
+}
+
+func (ui ConsoleUI) GetPlayerNameSelection(playerNumber string) string {
+	nameSelectionMessage := NewLineString + NameSelectMessage + playerNumber + ":" + NewLineString
+	ui.Output.Write(nameSelectionMessage)
+	selection := ui.Input.ReadStringOfLengthWithDefault(15, "Player"+playerNumber)
+	return selection
 }
