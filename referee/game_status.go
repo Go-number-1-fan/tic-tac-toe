@@ -1,4 +1,4 @@
-package game
+package referee
 
 type GameStatus string
 
