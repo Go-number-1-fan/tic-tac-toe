@@ -15,6 +15,10 @@ func (ui ConsoleUI) DisplayTieMessage() {
 	ui.Output.Write(TieMessage)
 }
 
+func (ui ConsoleUI) DisplayComputerThinkingMessage() {
+	ui.Output.Write(ComputerThinkingMessage)
+}
+
 func (ui ConsoleUI) DisplayWinMessage(winner string) {
 	ui.Output.Write(winner + WinMessage)
 }

@@ -8,6 +8,8 @@ type MockUI struct {
 
 func (ui MockUI) DisplayWelcomeMessage() {}
 
+func (ui MockUI) DisplayComputerThinkingMessage() {}
+
 func (ui MockUI) GetValidMove(board Board, marker string) int {
 	return ui.MockUserInput
 }
