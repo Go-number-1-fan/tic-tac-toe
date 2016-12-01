@@ -8,9 +8,10 @@ type EasyComputerPlayer struct {
 	Marker string
 }
 
-func (player EasyComputerPlayer) GetMove(board Board, ui UI) int {
+func (computer EasyComputerPlayer) GetMove(board Board, ui UI) int {
 	emptySpots := board.EmptySpots()
 	emptySpotSelection := rand.Intn(len(emptySpots))
+	ui.DisplayComputerThinkingMessage()
 	return emptySpots[emptySpotSelection]
 }
 

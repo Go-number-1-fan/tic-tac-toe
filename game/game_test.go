@@ -50,8 +50,14 @@ func TestGame_DoesNotSwitchThePlayersAtTheEndOfTheTurn_IfTheresATie(t *testing.T
 func TestGame_EndsIfTheStatusIsWin(t *testing.T) {
 	currentPlayer := MockPlayer{"X", 4}
 	nextPlayer := MockPlayer{"O", 1}
-	game := CreateGame(MockUI{0}, EmptyBoard(), currentPlayer, nextPlayer, MockReferee{Tie})
-	updatedGame := game.takeTurn()
+	board := Board{
+		E, X, O,
+		E, E, O,
+		E, X, E,
+	}
+	game := CreateGame(MockUI{0}, board, currentPlayer, nextPlayer, MockReferee{WinP1})
+	updatedGame := game.PlayGame()
+	assert.Equal(t, X, updatedGame.board[4])
 	assert.NotEqual(t, nextPlayer, updatedGame.players[0])
 }
 

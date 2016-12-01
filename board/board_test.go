@@ -59,16 +59,6 @@ func TestBoard_CanGiveAListOfAllEmptySpotsWhenSomeSpotsAreOccupied(t *testing.T)
 	assert.Equal(t, []int{2, 3, 4, 5, 6, 7, 8}, board.EmptySpots())
 }
 
-func TestBoard_CanTellYouIfAMoveIsInTheListOfEmptySpots(t *testing.T) {
-	board := EmptyBoard()
-	assert.True(t, board.IsMoveOpen(0))
-}
-
-func TestBoard_CanTellYouIfAMoveIsNotInTheListOfEmptySpots(t *testing.T) {
-	board := EmptyBoard().MakeMove(0, X)
-	assert.False(t, board.IsMoveOpen(0))
-}
-
 func TestBoard_CanCountTheNumberOfOccupiedSpacesForAnEmptyBoard(t *testing.T) {
 	board := EmptyBoard()
 	numberOfOccupiedSpaces := board.CountOccupiedSpots()
