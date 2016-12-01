@@ -3,6 +3,7 @@ package game
 import "github.com/stretchr/testify/assert"
 import . "github.com/go-number-1-fan/tic-tac-toe/board"
 import . "github.com/go-number-1-fan/tic-tac-toe/player"
+import . "github.com/go-number-1-fan/tic-tac-toe/referee"
 import . "github.com/go-number-1-fan/tic-tac-toe/ui"
 import "testing"
 
@@ -119,7 +120,7 @@ func TestGame_CanTakeATurnWithAComputer(t *testing.T) {
 		O, X, E,
 	}
 	firstPlayer := MockPlayer{"X", 5}
-	secondPlayer := ComputerPlayer{"O"}
+	secondPlayer := EasyComputerPlayer{"O"}
 
 	game := CreateGame(MockUI{1}, board, secondPlayer, firstPlayer, StandardReferee{})
 	updatedGame := game.takeTurn()

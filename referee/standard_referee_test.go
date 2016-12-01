@@ -1,4 +1,4 @@
-package game
+package referee
 
 import "github.com/stretchr/testify/assert"
 import . "github.com/go-number-1-fan/tic-tac-toe/board"
