@@ -2,6 +2,7 @@ package game
 
 import . "github.com/go-number-1-fan/tic-tac-toe/board"
 import . "github.com/go-number-1-fan/tic-tac-toe/player"
+import . "github.com/go-number-1-fan/tic-tac-toe/referee"
 import . "github.com/go-number-1-fan/tic-tac-toe/ui"
 
 type Game struct {
