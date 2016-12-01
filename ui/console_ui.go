@@ -52,11 +52,11 @@ func getBoardRowString(stringBoard []string, boardRowStartIndex int, rowLength i
 	return boardRow
 }
 
-func getDisplayBoard(board Board) string {
+func getDisplayBoard(board Board, player1Marker string, player2Marker string) string {
 	rowLength := board.RowLength()
 	charsPerRow := getCharsPerRow(rowLength)
 	boardString := NewLineString
-	stringBoard := board.StringBoard()
+	stringBoard := board.StringBoard(player1Marker, player2Marker)
 	for rowStartIndex := 0; rowStartIndex < len(board); {
 		boardString = boardString + getHorizontalDividerString(charsPerRow) + NewLineString
 		boardString = boardString + getBoardRowString(stringBoard, rowStartIndex, rowLength) + NewLineString
@@ -65,8 +65,8 @@ func getDisplayBoard(board Board) string {
 	return boardString
 }
 
-func (ui ConsoleUI) DisplayBoard(board Board) {
-	ui.Output.Write(getDisplayBoard(board))
+func (ui ConsoleUI) DisplayBoard(board Board, player1Marker string, player2Marker string) {
+	ui.Output.Write(getDisplayBoard(board, player1Marker, player2Marker))
 }
 
 func getHumanSelectMessage(marker string) string {
@@ -100,6 +100,18 @@ func (ui ConsoleUI) GetPlayerTypeSelection(playerName string) PlayerTypeSelectio
 func (ui ConsoleUI) GetPlayerNameSelection(playerNumber string) string {
 	nameSelectionMessage := NewLineString + NameSelectMessage + playerNumber + ":" + NewLineString
 	ui.Output.Write(nameSelectionMessage)
-	selection := ui.Input.ReadStringOfLengthWithDefault(15, "Player"+playerNumber)
+	selection := ui.Input.ReadStringOfLengthWithDefault(DefaultMaxNameLength, DefaultPlayerName+playerNumber)
+	return selection
+}
+
+func (ui ConsoleUI) GetPlayerMarkerSelection(playerName string, playerNumber string) string {
+	ui.Output.Write(MarkerSelectMessage + playerName + ":" + NewLineString)
+	var def string
+	if playerNumber == "1" {
+		def = DefaultPlayer1Marker
+	} else {
+		def = DefaultPlayer2Marker
+	}
+	selection := ui.Input.ReadStringOfLengthWithDefault(1, def)
 	return selection
 }

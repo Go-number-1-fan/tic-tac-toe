@@ -25,5 +25,10 @@ func TestEasyComputerPlayer_CanReturnAnotherValidMove(t *testing.T) {
 
 func TestEasyComputerPlayer_CanReturnAValidMarker(t *testing.T) {
 	player := EasyComputerPlayer{"X", "Computer"}
-	assert.Equal(t, player.GetMarker(), "X", "Computer")
+	assert.Equal(t, player.GetMarker(), "X")
+}
+
+func TestEasyComputerPlayer_CanReturnAValidName(t *testing.T) {
+	player := EasyComputerPlayer{"X", "Computer"}
+	assert.Equal(t, player.GetName(), "Computer")
 }
