@@ -41,5 +41,21 @@ func TestGameBuilder_CanCreateAGameWithAComputerPlayerWithAGivenName(t *testing.
 	game := gameBuilder.BuildGame()
 	_, ok := game.players[1].(EasyComputerPlayer)
 	assert.True(t, ok)
-	assert.Equal(t, "Eric", game.players[0].GetName())
+	assert.Equal(t, "Eric", game.players[1].GetName())
+}
+
+func TestGameBuilder_CanCreateAGameWithAHumanPlayerWithAGivenMarker(t *testing.T) {
+	gameBuilder := GameBuilder{ConsoleUI{MockInput{1, "T"}, MockOutput{}, ConsoleInputValidator{}}, StandardReferee{}}
+	game := gameBuilder.BuildGame()
+	_, ok := game.players[0].(HumanPlayer)
+	assert.True(t, ok)
+	assert.Equal(t, "T", game.players[0].GetMarker())
+}
+
+func TestGameBuilder_CanCreateAGameWithAComputerPlayerWithAGivenMarker(t *testing.T) {
+	gameBuilder := GameBuilder{ConsoleUI{MockInput{2, "E"}, MockOutput{}, ConsoleInputValidator{}}, StandardReferee{}}
+	game := gameBuilder.BuildGame()
+	_, ok := game.players[1].(EasyComputerPlayer)
+	assert.True(t, ok)
+	assert.Equal(t, "E", game.players[1].GetMarker())
 }
