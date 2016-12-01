@@ -5,8 +5,8 @@ import . "github.com/go-number-1-fan/tic-tac-toe/board"
 import . "github.com/go-number-1-fan/tic-tac-toe/ui"
 import "testing"
 
-func TestComputerPlayer_CanReturnAValidMove(t *testing.T) {
-	player := ComputerPlayer{"X"}
+func TestEasyComputerPlayer_CanReturnAValidMove(t *testing.T) {
+	player := EasyComputerPlayer{"X"}
 	board := Board{
 		X, O, X,
 		X, O, O,
@@ -14,8 +14,8 @@ func TestComputerPlayer_CanReturnAValidMove(t *testing.T) {
 	assert.Equal(t, player.GetMove(board, MockUI{-1}), 8)
 }
 
-func TestComputerPlayer_CanReturnAnotherValidMove(t *testing.T) {
-	player := ComputerPlayer{"X"}
+func TestEasyComputerPlayer_CanReturnAnotherValidMove(t *testing.T) {
+	player := EasyComputerPlayer{"X"}
 	board := Board{
 		X, O, X,
 		X, O, O,
@@ -23,7 +23,7 @@ func TestComputerPlayer_CanReturnAnotherValidMove(t *testing.T) {
 	assert.Equal(t, player.GetMove(board, MockUI{-1}), 8)
 }
 
-func TestComputerPlayer_CanReturnAValidMarker(t *testing.T) {
-	player := ComputerPlayer{"X"}
+func TestEasyComputerPlayer_CanReturnAValidMarker(t *testing.T) {
+	player := EasyComputerPlayer{"X"}
 	assert.Equal(t, player.GetMarker(), "X")
 }
