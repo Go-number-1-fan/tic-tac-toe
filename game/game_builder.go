@@ -11,20 +11,21 @@ type GameBuilder struct {
 }
 
 func (builder GameBuilder) BuildGame() Game {
-	player1 := builder.getPlayer("X", "1")
-	player2 := builder.getPlayer("O", "2")
+	player1 := builder.getPlayer("1")
+	player2 := builder.getPlayer("2")
 	return CreateGame(builder.UI, EmptyBoard(), player1, player2, builder.Ref)
 }
 
-func (builder GameBuilder) getPlayer(stringMarker string, playerNumber string) Player {
+func (builder GameBuilder) getPlayer(playerNumber string) Player {
 	playerNameSelection := builder.UI.GetPlayerNameSelection(playerNumber)
+	playerMarkerSelection := builder.UI.GetPlayerMarkerSelection(playerNameSelection, playerNumber)
 	playerTypeSelection := builder.UI.GetPlayerTypeSelection(playerNameSelection)
 	switch playerTypeSelection {
 	case HumanSelected:
-		return HumanPlayer{stringMarker, playerNameSelection}
+		return HumanPlayer{playerMarkerSelection, playerNameSelection}
 	case EasyComputerSelected:
-		return EasyComputerPlayer{stringMarker, playerNameSelection}
+		return EasyComputerPlayer{playerMarkerSelection, playerNameSelection}
 	default:
-		return HardComputerPlayer{stringMarker, playerNameSelection, builder.Ref}
+		return HardComputerPlayer{playerMarkerSelection, playerNameSelection, builder.Ref}
 	}
 }

@@ -34,7 +34,8 @@ func (game Game) PlayGame() Game {
 
 func (game Game) takeTurn() Game {
 	currentPlayer := game.players[0]
-	game.ui.DisplayBoard(game.board)
+	player1, player2 := game.getPlayersInOrder()
+	game.ui.DisplayBoard(game.board, player1.GetMarker(), player2.GetMarker())
 	playerMove := currentPlayer.GetMove(game.board, game.ui)
 	game.board = game.board.MakeMove(playerMove, game.getCurrentPlayerMarker())
 
@@ -44,10 +45,10 @@ func (game Game) takeTurn() Game {
 	case Continue:
 		game = game.swapPlayers()
 	case Tie:
-		game.ui.DisplayBoard(game.board)
+		game.ui.DisplayBoard(game.board, player1.GetMarker(), player2.GetMarker())
 		game.ui.DisplayTieMessage()
 	default:
-		game.ui.DisplayBoard(game.board)
+		game.ui.DisplayBoard(game.board, player1.GetMarker(), player2.GetMarker())
 		game.ui.DisplayWinMessage(currentPlayer.GetName())
 	}
 	return game
@@ -65,4 +66,15 @@ func (game Game) getCurrentPlayerMarker() Marker {
 	} else {
 		return O
 	}
+}
+
+func (game Game) getPlayersInOrder() (Player, Player) {
+	occupiedSpots := game.board.CountOccupiedSpots()
+	var player1, player2 Player
+	if occupiedSpots%2 == 0 {
+		player1, player2 = game.players[0], game.players[1]
+	} else {
+		player1, player2 = game.players[1], game.players[0]
+	}
+	return player1, player2
 }

@@ -14,3 +14,8 @@ func TestPlayer_CanReturnAValidMarker(t *testing.T) {
 	player := HumanPlayer{"X", "Player2"}
 	assert.Equal(t, player.GetMarker(), "X")
 }
+
+func TestPlayer_CanReturnAValidName(t *testing.T) {
+	player := HumanPlayer{"X", "Player2"}
+	assert.Equal(t, player.GetName(), "Player2")
+}
