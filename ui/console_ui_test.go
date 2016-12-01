@@ -33,7 +33,7 @@ func TestConsoleUI_CanGetTheDisplayBoardFromAEmptyBoard(t *testing.T) {
 			" | 3 | 4 | 5 | \n" +
 			" -------------\n" +
 			" | 6 | 7 | 8 | \n"
-	assert.Equal(t, expectedBoard, getDisplayBoard(EmptyBoard()))
+	assert.Equal(t, expectedBoard, getDisplayBoard(EmptyBoard(), "X", "O"))
 }
 
 func TestConsoleUI_CanGetTheDisplayBoardFromANonEmptyBoard(t *testing.T) {
@@ -45,7 +45,7 @@ func TestConsoleUI_CanGetTheDisplayBoardFromANonEmptyBoard(t *testing.T) {
 			" | 3 | X | 5 | \n" +
 			" -------------\n" +
 			" | 6 | 7 | O | \n"
-	assert.Equal(t, expectedBoard, getDisplayBoard(board))
+	assert.Equal(t, expectedBoard, getDisplayBoard(board, "X", "O"))
 }
 
 func TestConsoleUI_CanGetTheDisplayBoardFromAFullBoard(t *testing.T) {
@@ -61,7 +61,23 @@ func TestConsoleUI_CanGetTheDisplayBoardFromAFullBoard(t *testing.T) {
 			" | O | O | X | \n" +
 			" -------------\n" +
 			" | X | X | O | \n"
-	assert.Equal(t, expectedBoard, getDisplayBoard(board))
+	assert.Equal(t, expectedBoard, getDisplayBoard(board, "X", "O"))
+}
+
+func TestConsoleUI_CanGetTheDisplayBoardFromAFullBoardWithOtherMarkers(t *testing.T) {
+	board := Board{
+		X, X, O,
+		O, O, X,
+		X, X, O,
+	}
+	expectedBoard :=
+		"\n -------------\n" +
+			" | A | A | B | \n" +
+			" -------------\n" +
+			" | B | B | A | \n" +
+			" -------------\n" +
+			" | A | A | B | \n"
+	assert.Equal(t, expectedBoard, getDisplayBoard(board, "A", "B"))
 }
 
 func TestConsoleUI_CanGetTheHumanSelectMessage(t *testing.T) {
@@ -96,4 +112,11 @@ func ExampleGetPlayerNameSelection() {
 	ui.GetPlayerNameSelection("1")
 	// Output:
 	//Please Select a Name for Player1:
+}
+
+func ExampleGetPlayerMarkerSelection() {
+	ui := ConsoleUI{MockInput{2, "O"}, ConsoleOutput{}, ConsoleInputValidator{}}
+	ui.GetPlayerMarkerSelection("Tom", "2")
+	// Output:
+	//Please Select a Marker for Tom:
 }
