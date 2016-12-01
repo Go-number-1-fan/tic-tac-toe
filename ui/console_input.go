@@ -37,3 +37,18 @@ func (input ConsoleInput) ReadInt() int {
 	}
 	return number
 }
+
+func (input ConsoleInput) ReadStringOfLengthWithDefault(length int, def string) string {
+	var str string
+	var hasReadError bool
+	hasError := true
+	str, hasReadError = readAndTrimLine()
+	hasError = hasReadError || len(str) == 0
+	if hasError {
+		return def
+	}
+	if len(str) > length {
+		str = str[:length]
+	}
+	return str
+}
