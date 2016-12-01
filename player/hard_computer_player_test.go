@@ -6,6 +6,16 @@ import . "github.com/go-number-1-fan/tic-tac-toe/ui"
 import . "github.com/go-number-1-fan/tic-tac-toe/referee"
 import "testing"
 
+func TestHardComputerPlayer_CanReturnAValidMarker(t *testing.T) {
+	player := HardComputerPlayer{"X", "Computer", StandardReferee{}}
+	assert.Equal(t, player.GetMarker(), "X")
+}
+
+func TestHardComputerPlayer_CanReturnAValidName(t *testing.T) {
+	player := HardComputerPlayer{"X", "Computer", StandardReferee{}}
+	assert.Equal(t, player.GetName(), "Computer")
+}
+
 func TestHardComputerPlayer_CanTakeTheCornerOfAnOpenBoard(t *testing.T) {
 	player := HardComputerPlayer{"X", "Computer", StandardReferee{}}
 	board := Board{

@@ -3,7 +3,7 @@ package ui
 import . "github.com/go-number-1-fan/tic-tac-toe/board"
 
 type UI interface {
-	DisplayBoard(board Board)
+	DisplayBoard(board Board, player1Marker string, player2Marker string)
 	DisplayTieMessage()
 	DisplayComputerThinkingMessage(computerName string)
 	DisplayWelcomeMessage()
@@ -11,12 +11,5 @@ type UI interface {
 	GetValidMove(board Board, marker string) int
 	GetPlayerNameSelection(playerNumber string) string
 	GetPlayerTypeSelection(playerName string) PlayerTypeSelection
+	GetPlayerMarkerSelection(playerName string, playerNumber string) string
 }
-
-type PlayerTypeSelection int
-
-const (
-	HumanSelected        PlayerTypeSelection = 1
-	EasyComputerSelected PlayerTypeSelection = 2
-	HardComputerSelected PlayerTypeSelection = 3
-)

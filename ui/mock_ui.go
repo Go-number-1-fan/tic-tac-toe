@@ -14,7 +14,7 @@ func (ui MockUI) GetValidMove(board Board, marker string) int {
 	return ui.MockUserInput
 }
 
-func (ui MockUI) DisplayBoard(board Board) {}
+func (ui MockUI) DisplayBoard(board Board, player1Marker string, player2Marker string) {}
 
 func (ui MockUI) DisplayTieMessage() {}
 
@@ -26,4 +26,8 @@ func (ui MockUI) GetPlayerTypeSelection(playerName string) PlayerTypeSelection {
 
 func (ui MockUI) GetPlayerNameSelection(playerNumber string) string {
 	return "Player" + playerNumber
+}
+
+func (ui MockUI) GetPlayerMarkerSelection(playerName string, playerNumber string) string {
+	return playerName[:1]
 }

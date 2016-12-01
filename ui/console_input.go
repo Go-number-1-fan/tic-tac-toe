@@ -41,9 +41,8 @@ func (input ConsoleInput) ReadInt() int {
 func (input ConsoleInput) ReadStringOfLengthWithDefault(length int, def string) string {
 	var str string
 	var hasReadError bool
-	hasError := true
 	str, hasReadError = readAndTrimLine()
-	hasError = hasReadError || len(str) == 0
+	hasError := hasReadError || len(str) == 0
 	if hasError {
 		return def
 	}
