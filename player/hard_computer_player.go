@@ -18,6 +18,9 @@ func CreateHardComputerPlayer(marker string, ref Referee) HardComputerPlayer {
 }
 
 func (player HardComputerPlayer) GetMove(board Board, ui UI) int {
+	if len(board.EmptySpots()) > 6 {
+		ui.DisplayComputerThinkingMessage()
+	}
 	return player.scoreSpot(board, getCurrentMarker(board), 0)
 }
 
