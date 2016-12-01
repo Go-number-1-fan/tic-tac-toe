@@ -5,10 +5,11 @@ import . "github.com/go-number-1-fan/tic-tac-toe/board"
 type UI interface {
 	DisplayBoard(board Board)
 	DisplayTieMessage()
-	DisplayComputerThinkingMessage()
+	DisplayComputerThinkingMessage(computerName string)
 	DisplayWelcomeMessage()
 	DisplayWinMessage(winner string)
 	GetValidMove(board Board, marker string) int
+	GetPlayerNameSelection(playerNumber string) string
 	GetPlayerTypeSelection(playerName string) PlayerTypeSelection
 }
 

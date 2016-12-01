@@ -6,20 +6,30 @@ import . "github.com/go-number-1-fan/tic-tac-toe/referee"
 
 type HardComputerPlayer struct {
 	Marker  string
+	Name    string
 	Referee Referee
 }
+
 type ScoredSpot struct {
 	Spot  int
 	Score int
 }
 
-func CreateHardComputerPlayer(marker string, ref Referee) HardComputerPlayer {
-	return HardComputerPlayer{marker, ref}
+func CreateHardComputerPlayer(marker string, name string, ref Referee) HardComputerPlayer {
+	return HardComputerPlayer{marker, name, ref}
 }
 
-func (player HardComputerPlayer) GetMove(board Board, ui UI) int {
-	ui.DisplayComputerThinkingMessage()
-	return player.scoreSpot(board, getCurrentMarker(board), 0)
+func (computer HardComputerPlayer) GetMarker() string {
+	return computer.Marker
+}
+
+func (computer HardComputerPlayer) GetName() string {
+	return computer.Name
+}
+
+func (computer HardComputerPlayer) GetMove(board Board, ui UI) int {
+	ui.DisplayComputerThinkingMessage(computer.Name)
+	return computer.scoreSpot(board, getCurrentMarker(board), 0)
 }
 
 func (computer HardComputerPlayer) scoreSpot(board Board, currentMarker Marker, depth int) int {
@@ -49,10 +59,6 @@ func (computer HardComputerPlayer) scoreSpot(board Board, currentMarker Marker, 
 	} else {
 		return maxScore
 	}
-}
-
-func (player HardComputerPlayer) GetMarker() string {
-	return player.Marker
 }
 
 func flipMarker(currentMarker Marker) Marker {
