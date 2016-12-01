@@ -36,16 +36,6 @@ func (board Board) EmptySpots() []int {
 	return emptySpots
 }
 
-func (board Board) IsMoveOpen(spot int) bool {
-	emptySpots := board.EmptySpots()
-	for _, emptySpot := range emptySpots {
-		if spot == emptySpot {
-			return true
-		}
-	}
-	return false
-}
-
 func (board Board) CountOccupiedSpots() int {
 	return len(board) - len(board.EmptySpots())
 }
