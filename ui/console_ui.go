@@ -1,10 +1,16 @@
 package ui
 
 import . "github.com/go-number-1-fan/tic-tac-toe/board"
+import "time"
 
 type ConsoleUI struct {
-	Input  Input
-	Output Output
+	Input     Input
+	Output    Output
+	Validator ConsoleInputValidator
+}
+
+func CreateConsoleUI(input Input, output Output) ConsoleUI {
+	return ConsoleUI{input, output, ConsoleInputValidator{}}
 }
 
 func (ui ConsoleUI) DisplayWelcomeMessage() {
@@ -17,6 +23,7 @@ func (ui ConsoleUI) DisplayTieMessage() {
 
 func (ui ConsoleUI) DisplayComputerThinkingMessage() {
 	ui.Output.Write(ComputerThinkingMessage)
+	time.Sleep(2 * time.Second)
 }
 
 func (ui ConsoleUI) DisplayWinMessage(winner string) {
@@ -70,10 +77,22 @@ func (ui ConsoleUI) GetValidMove(board Board, marker string) int {
 	selectMessage := getHumanSelectMessage(marker)
 	ui.Output.Write(selectMessage)
 	selected := ui.Input.ReadInt()
-	for !board.IsMoveOpen(selected) {
-		ui.Output.Write(MoveNotValidMessage)
+	for !ui.Validator.IsValid(selected, board.EmptySpots()) {
+		ui.Output.Write(NotValidMessage)
 		ui.Output.Write(selectMessage)
 		selected = ui.Input.ReadInt()
 	}
 	return selected
+}
+
+func (ui ConsoleUI) GetPlayerTypeSelection(playerName string) PlayerTypeSelection {
+	ui.Output.Write(NewLineString + playerName + NewLineString)
+	ui.Output.Write(PlayerTypeSelectMessage)
+	selected := ui.Input.ReadInt()
+	for !ui.Validator.IsValid(selected, []int{1, 2, 3}) {
+		ui.Output.Write(PlayerTypeSelectMessage)
+		ui.Output.Write(NotValidMessage)
+		selected = ui.Input.ReadInt()
+	}
+	return PlayerTypeSelection(selected)
 }

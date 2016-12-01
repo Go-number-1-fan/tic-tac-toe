@@ -9,4 +9,13 @@ type UI interface {
 	DisplayWelcomeMessage()
 	DisplayWinMessage(winner string)
 	GetValidMove(board Board, marker string) int
+	GetPlayerTypeSelection(playerName string) PlayerTypeSelection
 }
+
+type PlayerTypeSelection int
+
+const (
+	HumanSelected        PlayerTypeSelection = 1
+	EasyComputerSelected PlayerTypeSelection = 2
+	HardComputerSelected PlayerTypeSelection = 3
+)
