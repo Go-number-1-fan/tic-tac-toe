@@ -3,18 +3,25 @@ package player
 import . "github.com/go-number-1-fan/tic-tac-toe/board"
 import . "github.com/go-number-1-fan/tic-tac-toe/ui"
 import "math/rand"
+import "time"
 
 type EasyComputerPlayer struct {
 	Marker string
+	Name   string
 }
 
 func (computer EasyComputerPlayer) GetMove(board Board, ui UI) int {
 	emptySpots := board.EmptySpots()
+	rand.Seed(int64(time.Now().UnixNano()))
 	emptySpotSelection := rand.Intn(len(emptySpots))
-	ui.DisplayComputerThinkingMessage()
+	ui.DisplayComputerThinkingMessage(computer.Name)
 	return emptySpots[emptySpotSelection]
 }
 
-func (player EasyComputerPlayer) GetMarker() string {
-	return player.Marker
+func (computer EasyComputerPlayer) GetMarker() string {
+	return computer.Marker
+}
+
+func (computer EasyComputerPlayer) GetName() string {
+	return computer.Name
 }

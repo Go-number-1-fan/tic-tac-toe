@@ -7,7 +7,7 @@ import . "github.com/go-number-1-fan/tic-tac-toe/referee"
 import "testing"
 
 func TestHardComputerPlayer_CanTakeTheCornerOfAnOpenBoard(t *testing.T) {
-	player := HardComputerPlayer{"X", StandardReferee{}}
+	player := HardComputerPlayer{"X", "Computer", StandardReferee{}}
 	board := Board{
 		E, E, E,
 		E, E, E,
@@ -18,7 +18,7 @@ func TestHardComputerPlayer_CanTakeTheCornerOfAnOpenBoard(t *testing.T) {
 }
 
 func TestHardComputerPlayer_CanWinGivenTheChance(t *testing.T) {
-	player := HardComputerPlayer{"X", StandardReferee{}}
+	player := HardComputerPlayer{"X", "Computer", StandardReferee{}}
 	board := Board{
 		X, X, E,
 		E, O, E,
@@ -29,7 +29,7 @@ func TestHardComputerPlayer_CanWinGivenTheChance(t *testing.T) {
 }
 
 func TestHardComputerPlayer_CanBlockAWinGivenTheChance(t *testing.T) {
-	player := HardComputerPlayer{"X", StandardReferee{}}
+	player := HardComputerPlayer{"X", "Computer", StandardReferee{}}
 	board := Board{
 		O, O, E,
 		E, X, E,
@@ -40,7 +40,7 @@ func TestHardComputerPlayer_CanBlockAWinGivenTheChance(t *testing.T) {
 }
 
 func TestHardComputerPlayer_CanTakeTheMiddleIfITakeACorner(t *testing.T) {
-	player := HardComputerPlayer{"O", StandardReferee{}}
+	player := HardComputerPlayer{"O", "Computer", StandardReferee{}}
 	board := Board{
 		X, E, E,
 		E, E, E,
@@ -51,7 +51,7 @@ func TestHardComputerPlayer_CanTakeTheMiddleIfITakeACorner(t *testing.T) {
 }
 
 func TestHardComputerPlayer_TakesTheLastSpotOnAnAlmostFullBoard(t *testing.T) {
-	player := HardComputerPlayer{"X", StandardReferee{}}
+	player := HardComputerPlayer{"X", "Computer", StandardReferee{}}
 	board := Board{
 		X, O, X,
 		X, O, O,

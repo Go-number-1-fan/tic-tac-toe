@@ -1,9 +1,14 @@
 package ui
 
 type MockInput struct {
-	MockConsoleInput int
+	MockConsoleIntInput    int
+	MockConsoleStringInput string
 }
 
 func (input MockInput) ReadInt() int {
-	return input.MockConsoleInput
+	return input.MockConsoleIntInput
+}
+
+func (input MockInput) ReadStringOfLengthWithDefault(length int, def string) string {
+	return input.MockConsoleStringInput
 }

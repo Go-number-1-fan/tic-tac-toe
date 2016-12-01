@@ -26,7 +26,6 @@ func CreateGame(ui UI, board Board, player1 Player, player2 Player, referee Refe
 }
 
 func (game Game) PlayGame() Game {
-	game.ui.DisplayWelcomeMessage()
 	for game.status == Continue {
 		game = game.takeTurn()
 	}
@@ -49,7 +48,7 @@ func (game Game) takeTurn() Game {
 		game.ui.DisplayTieMessage()
 	default:
 		game.ui.DisplayBoard(game.board)
-		game.ui.DisplayWinMessage(currentPlayer.GetMarker())
+		game.ui.DisplayWinMessage(currentPlayer.GetName())
 	}
 	return game
 }
