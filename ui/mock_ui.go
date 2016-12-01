@@ -19,3 +19,7 @@ func (ui MockUI) DisplayBoard(board Board) {}
 func (ui MockUI) DisplayTieMessage() {}
 
 func (ui MockUI) DisplayWinMessage(winner string) {}
+
+func (ui MockUI) GetPlayerTypeSelection(playerName string) PlayerTypeSelection {
+	return PlayerTypeSelection(ui.MockUserInput)
+}

@@ -25,11 +25,12 @@ func CreateGame(ui UI, board Board, player1 Player, player2 Player, referee Refe
 	return game
 }
 
-func (game Game) PlayGame() {
+func (game Game) PlayGame() Game {
 	game.ui.DisplayWelcomeMessage()
 	for game.status == Continue {
 		game = game.takeTurn()
 	}
+	return game
 }
 
 func (game Game) takeTurn() Game {
