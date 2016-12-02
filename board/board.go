@@ -54,7 +54,7 @@ func (board Board) StringBoard(player1Marker string, player2Marker string) []str
 		case O:
 			stringBoard = append(stringBoard, player2Marker)
 		default:
-			stringBoard = append(stringBoard, strconv.Itoa(spot))
+			stringBoard = append(stringBoard, strconv.Itoa(spot+1))
 		}
 	}
 	return stringBoard

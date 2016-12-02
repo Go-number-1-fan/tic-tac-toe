@@ -15,24 +15,24 @@ func TestConsoleUI_CanGetTheHorizontalDividerString(t *testing.T) {
 
 func TestConsoleUI_CanGetBoardRowString(t *testing.T) {
 	stringBoard := []string{
-		"X", "O", "2",
-		"O", "O", "5",
-		"6", "7", "8",
+		"X", "O", "3",
+		"O", "O", "6",
+		"7", "8", "9",
 	}
 
-	assert.Equal(t, " | X | O | 2 | ", getBoardRowString(stringBoard, 0, 3))
-	assert.Equal(t, " | O | O | 5 | ", getBoardRowString(stringBoard, 3, 3))
-	assert.Equal(t, " | 6 | 7 | 8 | ", getBoardRowString(stringBoard, 6, 3))
+	assert.Equal(t, " | X | O | 3 | ", getBoardRowString(stringBoard, 0, 3))
+	assert.Equal(t, " | O | O | 6 | ", getBoardRowString(stringBoard, 3, 3))
+	assert.Equal(t, " | 7 | 8 | 9 | ", getBoardRowString(stringBoard, 6, 3))
 }
 
 func TestConsoleUI_CanGetTheDisplayBoardFromAEmptyBoard(t *testing.T) {
 	expectedBoard :=
 		"\n -------------\n" +
-			" | 0 | 1 | 2 | \n" +
+			" | 1 | 2 | 3 | \n" +
 			" -------------\n" +
-			" | 3 | 4 | 5 | \n" +
+			" | 4 | 5 | 6 | \n" +
 			" -------------\n" +
-			" | 6 | 7 | 8 | \n" +
+			" | 7 | 8 | 9 | \n" +
 			" -------------\n\n"
 	assert.Equal(t, expectedBoard, getDisplayBoard(EmptyBoard(), "X", "O"))
 }
@@ -41,11 +41,11 @@ func TestConsoleUI_CanGetTheDisplayBoardFromANonEmptyBoard(t *testing.T) {
 	board := EmptyBoard().MakeMove(0, X).MakeMove(8, O).MakeMove(4, X)
 	expectedBoard :=
 		"\n -------------\n" +
-			" | X | 1 | 2 | \n" +
+			" | X | 2 | 3 | \n" +
 			" -------------\n" +
-			" | 3 | X | 5 | \n" +
+			" | 4 | X | 6 | \n" +
 			" -------------\n" +
-			" | 6 | 7 | O | \n" +
+			" | 7 | 8 | O | \n" +
 			" -------------\n\n"
 	assert.Equal(t, expectedBoard, getDisplayBoard(board, "X", "O"))
 }
