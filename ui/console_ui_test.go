@@ -120,3 +120,10 @@ func ExampleGetPlayerMarkerSelection() {
 	// Output:
 	//Please Select a Marker for Tom:
 }
+
+func ExampleGetPlayAgainSelection() {
+	ui := ConsoleUI{MockInput{2, "O"}, ConsoleOutput{}, ConsoleInputValidator{}}
+	ui.GetPlayAgainSelection()
+	// Output:
+	//Would you like to play again? (y | n):
+}

@@ -12,4 +12,5 @@ type UI interface {
 	GetPlayerNameSelection(playerNumber string) string
 	GetPlayerTypeSelection(playerName string) PlayerTypeSelection
 	GetPlayerMarkerSelection(playerName string, playerNumber string) string
+	GetPlayAgainSelection() bool
 }
