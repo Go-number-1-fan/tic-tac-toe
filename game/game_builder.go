@@ -27,6 +27,7 @@ func (builder GameBuilder) getReferee() Referee {
 }
 
 func (builder GameBuilder) getPlayer(playerNumber string, ref Referee) Player {
+	builder.UI.Clear()
 	playerNameSelection := builder.UI.GetPlayerNameSelection(playerNumber)
 	playerMarkerSelection := builder.UI.GetPlayerMarkerSelection(playerNameSelection, playerNumber)
 	playerTypeSelection := builder.UI.GetPlayerTypeSelection(playerNameSelection, playerMarkerSelection)
