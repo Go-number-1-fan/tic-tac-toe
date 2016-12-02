@@ -1,6 +1,5 @@
 package ui
 
-import . "github.com/go-number-1-fan/tic-tac-toe/board"
 import "time"
 import "strings"
 
@@ -31,26 +30,36 @@ func (ui ConsoleUI) DisplayWinMessage(winner string) {
 	ui.Output.Write(winner + WinMessage)
 }
 
-func (ui ConsoleUI) DisplayBoard(board Board, player1Marker string, player2Marker string) {
+func (ui ConsoleUI) DisplayBoard(board []string, player1Marker string, player2Marker string) {
 	ui.Clear()
-	coloredPlayer1Marker := getStringWithColor(player1Marker, DefaultPlayer1Color)
-	coloredPlayer2Marker := getStringWithColor(player2Marker, DefaultPlayer2Color)
-	ui.Output.Write(getDisplayBoard(board, coloredPlayer1Marker, coloredPlayer2Marker))
+	stringBoard := getCustomizedStringBoard(board, player1Marker, player2Marker)
+	ui.Output.Write(getDisplayBoard(stringBoard))
 }
 
-func getStringWithColor(str string, color string) string {
-	return color + str + DefaultPlayerColorClose
+func getCustomizedStringBoard(stringBoard []string, player1Marker string, player2Marker string) []string {
+	var customizedStringBoard []string
+	for _, marker := range stringBoard {
+		switch marker {
+		case "X":
+			customizedStringBoard = append(customizedStringBoard, DefaultPlayer1Color+player1Marker+DefaultPlayerColorClose)
+		case "O":
+			customizedStringBoard = append(customizedStringBoard, DefaultPlayer2Color+player2Marker+DefaultPlayerColorClose)
+		default:
+			customizedStringBoard = append(customizedStringBoard, marker)
+		}
+	}
+	return customizedStringBoard
 }
 
 func getHumanSelectMessage(marker string) string {
 	return marker + SelectASpotMessage
 }
 
-func (ui ConsoleUI) GetValidMove(board Board, marker string) int {
+func (ui ConsoleUI) GetValidMove(openSpots []int, marker string) int {
 	selectMessage := getHumanSelectMessage(marker)
 	ui.Output.Write(selectMessage)
 	selected := ui.Input.ReadInt()
-	for !ui.Validator.IsValid(selected-1, board.EmptySpots()) {
+	for !ui.Validator.IsValid(selected-1, openSpots) {
 		ui.Output.Write(NotValidMessage)
 		ui.Output.Write(selectMessage)
 		selected = ui.Input.ReadInt()

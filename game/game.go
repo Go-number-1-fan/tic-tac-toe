@@ -43,7 +43,7 @@ func (game Game) PlayGame() Game {
 func (game Game) takeTurn() Game {
 	currentPlayer := game.players[0]
 	player1, player2 := game.getPlayersInOrder()
-	game.ui.DisplayBoard(game.board, player1.GetMarker(), player2.GetMarker())
+	game.ui.DisplayBoard(game.board.StringBoard(), player1.GetMarker(), player2.GetMarker())
 	playerMove := currentPlayer.GetMove(game.board, game.ui)
 	game.board = game.board.MakeMove(playerMove, game.getCurrentPlayerMarker())
 
@@ -53,10 +53,10 @@ func (game Game) takeTurn() Game {
 	case Continue:
 		game = game.swapPlayers()
 	case Tie:
-		game.ui.DisplayBoard(game.board, player1.GetMarker(), player2.GetMarker())
+		game.ui.DisplayBoard(game.board.StringBoard(), player1.GetMarker(), player2.GetMarker())
 		game.ui.DisplayTieMessage()
 	default:
-		game.ui.DisplayBoard(game.board, player1.GetMarker(), player2.GetMarker())
+		game.ui.DisplayBoard(game.board.StringBoard(), player1.GetMarker(), player2.GetMarker())
 		game.ui.DisplayWinMessage(currentPlayer.GetName())
 	}
 	return game
