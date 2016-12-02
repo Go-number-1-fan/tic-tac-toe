@@ -39,3 +39,6 @@ func (ui MockUI) GetPlayerMarkerSelection(playerName string, playerNumber string
 func (ui MockUI) GetPlayAgainSelection() bool {
 	return false
 }
+
+func (ui MockUI) Clear() {
+}
