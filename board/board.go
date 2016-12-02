@@ -45,14 +45,14 @@ func (board Board) RowLength() int {
 	return int(sqrt)
 }
 
-func (board Board) StringBoard(player1Marker string, player2Marker string) []string {
+func (board Board) StringBoard() []string {
 	var stringBoard []string
 	for spot, marker := range board {
 		switch marker {
 		case X:
-			stringBoard = append(stringBoard, player1Marker)
+			stringBoard = append(stringBoard, "X")
 		case O:
-			stringBoard = append(stringBoard, player2Marker)
+			stringBoard = append(stringBoard, "O")
 		default:
 			stringBoard = append(stringBoard, strconv.Itoa(spot+1))
 		}

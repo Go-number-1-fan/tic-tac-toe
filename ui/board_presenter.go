@@ -1,6 +1,6 @@
 package ui
 
-import . "github.com/go-number-1-fan/tic-tac-toe/board"
+import "math"
 
 func getCharsPerRow(rowLength int) int {
 	charsPerRow := (rowLength * 3) + (rowLength + 1)
@@ -24,16 +24,20 @@ func getBoardRowString(stringBoard []string, boardRowStartIndex int, rowLength i
 	return boardRow
 }
 
-func getDisplayBoard(board Board, player1Marker string, player2Marker string) string {
-	rowLength := board.RowLength()
+func getDisplayBoard(stringBoard []string) string {
+	rowLength := boardRowLength(stringBoard)
 	charsPerRow := getCharsPerRow(rowLength)
 	boardString := NewLineString
-	stringBoard := board.StringBoard(player1Marker, player2Marker)
-	for rowStartIndex := 0; rowStartIndex < len(board); {
+	for rowStartIndex := 0; rowStartIndex < len(stringBoard); {
 		boardString = boardString + getHorizontalDividerString(charsPerRow) + NewLineString
 		boardString = boardString + getBoardRowString(stringBoard, rowStartIndex, rowLength) + NewLineString
 		rowStartIndex = rowStartIndex + rowLength
 	}
 	boardString = boardString + getHorizontalDividerString(charsPerRow) + NewLineString + NewLineString
 	return boardString
+}
+
+func boardRowLength(stringBoard []string) int {
+	sqrt := math.Sqrt(float64(len(stringBoard)))
+	return int(sqrt)
 }

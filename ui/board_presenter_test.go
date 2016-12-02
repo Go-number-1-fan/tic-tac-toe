@@ -34,11 +34,11 @@ func TestConsoleUI_CanGetTheDisplayBoardFromAEmptyBoard(t *testing.T) {
 			" -------------\n" +
 			" | 7 | 8 | 9 | \n" +
 			" -------------\n\n"
-	assert.Equal(t, expectedBoard, getDisplayBoard(EmptyBoard(), "X", "O"))
+	assert.Equal(t, expectedBoard, getDisplayBoard(EmptyBoard().StringBoard()))
 }
 
 func TestConsoleUI_CanGetTheDisplayBoardFromANonEmptyBoard(t *testing.T) {
-	board := EmptyBoard().MakeMove(0, X).MakeMove(8, O).MakeMove(4, X)
+	board := EmptyBoard().MakeMove(0, X).MakeMove(8, O).MakeMove(4, X).StringBoard()
 	expectedBoard :=
 		"\n -------------\n" +
 			" | X | 2 | 3 | \n" +
@@ -47,7 +47,7 @@ func TestConsoleUI_CanGetTheDisplayBoardFromANonEmptyBoard(t *testing.T) {
 			" -------------\n" +
 			" | 7 | 8 | O | \n" +
 			" -------------\n\n"
-	assert.Equal(t, expectedBoard, getDisplayBoard(board, "X", "O"))
+	assert.Equal(t, expectedBoard, getDisplayBoard(board))
 }
 
 func TestConsoleUI_CanGetTheDisplayBoardFromAFullBoard(t *testing.T) {
@@ -55,7 +55,7 @@ func TestConsoleUI_CanGetTheDisplayBoardFromAFullBoard(t *testing.T) {
 		X, X, O,
 		O, O, X,
 		X, X, O,
-	}
+	}.StringBoard()
 	expectedBoard :=
 		"\n -------------\n" +
 			" | X | X | O | \n" +
@@ -64,24 +64,7 @@ func TestConsoleUI_CanGetTheDisplayBoardFromAFullBoard(t *testing.T) {
 			" -------------\n" +
 			" | X | X | O | \n" +
 			" -------------\n\n"
-	assert.Equal(t, expectedBoard, getDisplayBoard(board, "X", "O"))
-}
-
-func TestConsoleUI_CanGetTheDisplayBoardFromAFullBoardWithOtherMarkers(t *testing.T) {
-	board := Board{
-		X, X, O,
-		O, O, X,
-		X, X, O,
-	}
-	expectedBoard :=
-		"\n -------------\n" +
-			" | A | A | B | \n" +
-			" -------------\n" +
-			" | B | B | A | \n" +
-			" -------------\n" +
-			" | A | A | B | \n" +
-			" -------------\n\n"
-	assert.Equal(t, expectedBoard, getDisplayBoard(board, "A", "B"))
+	assert.Equal(t, expectedBoard, getDisplayBoard(board))
 }
 
 func TestConsoleUI_CanGetTheHumanSelectMessage(t *testing.T) {

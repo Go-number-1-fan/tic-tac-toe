@@ -1,7 +1,5 @@
 package ui
 
-import . "github.com/go-number-1-fan/tic-tac-toe/board"
-
 type MockUI struct {
 	MockUserInput int
 }
@@ -10,11 +8,11 @@ func (ui MockUI) DisplayWelcomeMessage() {}
 
 func (ui MockUI) DisplayComputerThinkingMessage(computerName string) {}
 
-func (ui MockUI) GetValidMove(board Board, marker string) int {
+func (ui MockUI) GetValidMove(openSpots []int, marker string) int {
 	return ui.MockUserInput
 }
 
-func (ui MockUI) DisplayBoard(board Board, player1Marker string, player2Marker string) {}
+func (ui MockUI) DisplayBoard(board []string, player1Marker string, player2Marker string) {}
 
 func (ui MockUI) DisplayTieMessage() {}
 
