@@ -98,9 +98,9 @@ func ExampleWelcomeMessage() {
 
 func ExampleGetPlayerTypeSelection() {
 	ui := ConsoleUI{MockInput{2, ""}, ConsoleOutput{}, ConsoleInputValidator{}}
-	ui.GetPlayerTypeSelection("Player1")
+	ui.GetPlayerTypeSelection("Player1", "X")
 	// Output:
-	//	Player1
+	//	Player1 | X
 	//Please Select a Player Type:
 	//	1. Human Player
 	//	2. Easy Computer Player

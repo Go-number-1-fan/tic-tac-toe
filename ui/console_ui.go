@@ -86,8 +86,8 @@ func (ui ConsoleUI) GetValidMove(board Board, marker string) int {
 	return selected
 }
 
-func (ui ConsoleUI) GetPlayerTypeSelection(playerName string) PlayerTypeSelection {
-	ui.Output.Write(NewLineString + NewLineString + playerName + NewLineString)
+func (ui ConsoleUI) GetPlayerTypeSelection(playerName string, playerMarker string) PlayerTypeSelection {
+	ui.Output.Write(NewLineString + NewLineString + playerName + VerticalDividerString + playerMarker + NewLineString)
 	ui.Output.Write(PlayerTypeSelectMessage)
 	selected := ui.Input.ReadInt()
 	for !ui.Validator.IsValid(selected, []int{1, 2, 3}) {
