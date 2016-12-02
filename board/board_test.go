@@ -103,9 +103,9 @@ func TestBoard_CanGetTheLengthOfOneOfItsRowsForALargeBoard(t *testing.T) {
 func TestBoard_CanReturnItselfAsAStringAndReplaceTheOpenSpotsWithTheIndex(t *testing.T) {
 	board := EmptyBoard()
 	expectedStringBoard := []string{
-		"0", "1", "2",
-		"3", "4", "5",
-		"6", "7", "8",
+		"1", "2", "3",
+		"4", "5", "6",
+		"7", "8", "9",
 	}
 	assert.Equal(t, expectedStringBoard, board.StringBoard("X", "O"))
 }
@@ -113,9 +113,9 @@ func TestBoard_CanReturnItselfAsAStringAndReplaceTheOpenSpotsWithTheIndex(t *tes
 func TestBoard_CanReturnItselfAsAStringAndReplaceOccupiedSpotsWithTheMarker(t *testing.T) {
 	board := EmptyBoard().MakeMove(1, X).MakeMove(8, O)
 	expectedStringBoard := []string{
-		"0", "X", "2",
-		"3", "4", "5",
-		"6", "7", "O",
+		"1", "X", "3",
+		"4", "5", "6",
+		"7", "8", "O",
 	}
 	assert.Equal(t, expectedStringBoard, board.StringBoard("X", "O"))
 }
@@ -123,9 +123,9 @@ func TestBoard_CanReturnItselfAsAStringAndReplaceOccupiedSpotsWithTheMarker(t *t
 func TestBoard_CanReturnItselfAsAStringAndReplaceOccupiedSpotsWithAnyMarkerProvided(t *testing.T) {
 	board := EmptyBoard().MakeMove(1, X).MakeMove(8, O)
 	expectedStringBoard := []string{
-		"0", "T", "2",
-		"3", "4", "5",
-		"6", "7", "E",
+		"1", "T", "3",
+		"4", "5", "6",
+		"7", "8", "E",
 	}
 	assert.Equal(t, expectedStringBoard, board.StringBoard("T", "E"))
 }

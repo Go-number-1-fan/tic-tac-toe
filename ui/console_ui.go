@@ -80,12 +80,12 @@ func (ui ConsoleUI) GetValidMove(board Board, marker string) int {
 	selectMessage := getHumanSelectMessage(marker)
 	ui.Output.Write(selectMessage)
 	selected := ui.Input.ReadInt()
-	for !ui.Validator.IsValid(selected, board.EmptySpots()) {
+	for !ui.Validator.IsValid(selected-1, board.EmptySpots()) {
 		ui.Output.Write(NotValidMessage)
 		ui.Output.Write(selectMessage)
 		selected = ui.Input.ReadInt()
 	}
-	return selected
+	return selected - 1
 }
 
 func (ui ConsoleUI) GetRefereeSelection() RefereeTypeSelection {
