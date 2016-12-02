@@ -31,51 +31,15 @@ func (ui ConsoleUI) DisplayWinMessage(winner string) {
 	ui.Output.Write(winner + WinMessage)
 }
 
-func getCharsPerRow(rowLength int) int {
-	charsPerRow := (rowLength * 3) + (rowLength + 1)
-	return charsPerRow
-}
-
-func getHorizontalDividerString(charsPerRow int) string {
-	boardString := " "
-	for j := 0; j < charsPerRow; j++ {
-		boardString = boardString + HorizontalDividerString
-	}
-	return boardString
-}
-
-func getBoardRowString(stringBoard []string, boardRowStartIndex int, rowLength int) string {
-	boardRow := ""
-	for boardColumn := 0; boardColumn < rowLength; boardColumn++ {
-		boardRow = boardRow + VerticalDividerString + stringBoard[boardRowStartIndex+boardColumn]
-	}
-	boardRow = boardRow + VerticalDividerString
-	return boardRow
-}
-
-func getStringWithColor(str string, color string) string {
-	return color + str + DefaultPlayerColorClose
-}
-
-func getDisplayBoard(board Board, player1Marker string, player2Marker string) string {
-	rowLength := board.RowLength()
-	charsPerRow := getCharsPerRow(rowLength)
-	boardString := NewLineString
-	stringBoard := board.StringBoard(player1Marker, player2Marker)
-	for rowStartIndex := 0; rowStartIndex < len(board); {
-		boardString = boardString + getHorizontalDividerString(charsPerRow) + NewLineString
-		boardString = boardString + getBoardRowString(stringBoard, rowStartIndex, rowLength) + NewLineString
-		rowStartIndex = rowStartIndex + rowLength
-	}
-	boardString = boardString + getHorizontalDividerString(charsPerRow) + NewLineString + NewLineString
-	return boardString
-}
-
 func (ui ConsoleUI) DisplayBoard(board Board, player1Marker string, player2Marker string) {
 	ui.Clear()
 	coloredPlayer1Marker := getStringWithColor(player1Marker, DefaultPlayer1Color)
 	coloredPlayer2Marker := getStringWithColor(player2Marker, DefaultPlayer2Color)
 	ui.Output.Write(getDisplayBoard(board, coloredPlayer1Marker, coloredPlayer2Marker))
+}
+
+func getStringWithColor(str string, color string) string {
+	return color + str + DefaultPlayerColorClose
 }
 
 func getHumanSelectMessage(marker string) string {
