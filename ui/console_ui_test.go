@@ -96,6 +96,16 @@ func ExampleWelcomeMessage() {
 	//Most Importantly... Have fun!
 }
 
+func ExampleGetRefereeSelection() {
+	ui := ConsoleUI{MockInput{2, ""}, ConsoleOutput{}, ConsoleInputValidator{}}
+	ui.GetRefereeSelection()
+	// Output:
+	//Please Select a Ruleset:
+	//	1. Standard Ruleset - 3 in a row, Horizontal/Vertical/Diagonal
+	//	2. Corner Ruleset - Place a Marker in 3 of the 4 corners
+
+}
+
 func ExampleGetPlayerTypeSelection() {
 	ui := ConsoleUI{MockInput{2, ""}, ConsoleOutput{}, ConsoleInputValidator{}}
 	ui.GetPlayerTypeSelection("Player1", "X")

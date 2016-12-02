@@ -2,8 +2,6 @@ package referee
 
 import . "github.com/go-number-1-fan/tic-tac-toe/board"
 
-type WinableCombination []Marker
-
 type StandardReferee struct{}
 
 func (referee StandardReferee) GetGameStatus(board Board) GameStatus {
