@@ -9,7 +9,7 @@ type HumanPlayer struct {
 }
 
 func (player HumanPlayer) GetMove(board Board, ui UI) int {
-	return ui.GetValidMove(board, player.Name)
+	return ui.GetValidMove(board.EmptySpots(), player.Name)
 }
 
 func (player HumanPlayer) GetMarker() string {
