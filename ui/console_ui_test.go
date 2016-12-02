@@ -32,7 +32,8 @@ func TestConsoleUI_CanGetTheDisplayBoardFromAEmptyBoard(t *testing.T) {
 			" -------------\n" +
 			" | 3 | 4 | 5 | \n" +
 			" -------------\n" +
-			" | 6 | 7 | 8 | \n"
+			" | 6 | 7 | 8 | \n" +
+			" -------------\n\n"
 	assert.Equal(t, expectedBoard, getDisplayBoard(EmptyBoard(), "X", "O"))
 }
 
@@ -44,7 +45,8 @@ func TestConsoleUI_CanGetTheDisplayBoardFromANonEmptyBoard(t *testing.T) {
 			" -------------\n" +
 			" | 3 | X | 5 | \n" +
 			" -------------\n" +
-			" | 6 | 7 | O | \n"
+			" | 6 | 7 | O | \n" +
+			" -------------\n\n"
 	assert.Equal(t, expectedBoard, getDisplayBoard(board, "X", "O"))
 }
 
@@ -60,7 +62,8 @@ func TestConsoleUI_CanGetTheDisplayBoardFromAFullBoard(t *testing.T) {
 			" -------------\n" +
 			" | O | O | X | \n" +
 			" -------------\n" +
-			" | X | X | O | \n"
+			" | X | X | O | \n" +
+			" -------------\n\n"
 	assert.Equal(t, expectedBoard, getDisplayBoard(board, "X", "O"))
 }
 
@@ -76,7 +79,8 @@ func TestConsoleUI_CanGetTheDisplayBoardFromAFullBoardWithOtherMarkers(t *testin
 			" -------------\n" +
 			" | B | B | A | \n" +
 			" -------------\n" +
-			" | A | A | B | \n"
+			" | A | A | B | \n" +
+			" -------------\n\n"
 	assert.Equal(t, expectedBoard, getDisplayBoard(board, "A", "B"))
 }
 
