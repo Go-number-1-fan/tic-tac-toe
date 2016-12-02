@@ -67,6 +67,7 @@ func getDisplayBoard(board Board, player1Marker string, player2Marker string) st
 }
 
 func (ui ConsoleUI) DisplayBoard(board Board, player1Marker string, player2Marker string) {
+	ui.Clear()
 	ui.Output.Write(getDisplayBoard(board, player1Marker, player2Marker))
 }
 
@@ -132,4 +133,8 @@ func (ui ConsoleUI) GetPlayAgainSelection() bool {
 	ui.Output.Write(PlayAgainSelectMessage)
 	selection := strings.ToLower(ui.Input.ReadStringOfLengthWithDefault(1, "n"))
 	return selection == "y"
+}
+
+func (ui ConsoleUI) Clear() {
+	ui.Output.Clear()
 }

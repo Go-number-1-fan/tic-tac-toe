@@ -137,3 +137,10 @@ func ExampleGetPlayAgainSelection() {
 	// Output:
 	//Would you like to play again? (y | n):
 }
+
+func ExampleCanClearTheBoard() {
+	ui := ConsoleUI{MockInput{2, "O"}, MockOutput{}, ConsoleInputValidator{}}
+	ui.Clear()
+	// Output:
+	//CLEARED
+}
