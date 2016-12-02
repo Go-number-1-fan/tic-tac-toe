@@ -20,7 +20,7 @@ func (ui MockUI) DisplayTieMessage() {}
 
 func (ui MockUI) DisplayWinMessage(winner string) {}
 
-func (ui MockUI) GetPlayerTypeSelection(playerName string) PlayerTypeSelection {
+func (ui MockUI) GetPlayerTypeSelection(playerName string, playerMarker string) PlayerTypeSelection {
 	return PlayerTypeSelection(ui.MockUserInput)
 }
 
