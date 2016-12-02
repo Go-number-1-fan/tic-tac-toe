@@ -70,3 +70,36 @@ func TestHardComputerPlayer_TakesTheLastSpotOnAnAlmostFullBoard(t *testing.T) {
 	computerMove := player.GetMove(board, MockUI{-1})
 	assert.Equal(t, 8, computerMove)
 }
+
+func TestHardComputerPlayer_CornerReferee_TakesACornerOnAnOpenBoard(t *testing.T) {
+	player := HardComputerPlayer{"X", "Computer", CornerReferee{}}
+	board := Board{
+		E, E, E,
+		E, E, E,
+		E, E, E}
+
+	computerMove := player.GetMove(board, MockUI{-1})
+	assert.Equal(t, 0, computerMove)
+}
+
+func TestHardComputerPlayer_CornerReferee_StopsAWin(t *testing.T) {
+	player := HardComputerPlayer{"O", "Computer", CornerReferee{}}
+	board := Board{
+		X, E, O,
+		E, E, E,
+		X, E, E}
+
+	computerMove := player.GetMove(board, MockUI{-1})
+	assert.Equal(t, 8, computerMove)
+}
+
+func TestHardComputerPlayer_CornerReferee_WinsIfItCan(t *testing.T) {
+	player := HardComputerPlayer{"O", "Computer", CornerReferee{}}
+	board := Board{
+		X, E, O,
+		X, E, X,
+		O, E, E}
+
+	computerMove := player.GetMove(board, MockUI{-1})
+	assert.Equal(t, 8, computerMove)
+}

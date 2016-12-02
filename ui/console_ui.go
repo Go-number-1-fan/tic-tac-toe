@@ -86,6 +86,17 @@ func (ui ConsoleUI) GetValidMove(board Board, marker string) int {
 	return selected
 }
 
+func (ui ConsoleUI) GetRefereeSelection() RefereeTypeSelection {
+	ui.Output.Write(RefereeSelectMessage)
+	selected := ui.Input.ReadInt()
+	for !ui.Validator.IsValid(selected, []int{1, 2}) {
+		ui.Output.Write(RefereeSelectMessage)
+		ui.Output.Write(NotValidMessage)
+		selected = ui.Input.ReadInt()
+	}
+	return RefereeTypeSelection(selected)
+}
+
 func (ui ConsoleUI) GetPlayerTypeSelection(playerName string, playerMarker string) PlayerTypeSelection {
 	ui.Output.Write(NewLineString + NewLineString + playerName + VerticalDividerString + playerMarker + NewLineString)
 	ui.Output.Write(PlayerTypeSelectMessage)
