@@ -2,6 +2,7 @@ package ui
 
 import . "github.com/go-number-1-fan/tic-tac-toe/board"
 import "time"
+import "strings"
 
 type ConsoleUI struct {
 	Input     Input
@@ -114,4 +115,10 @@ func (ui ConsoleUI) GetPlayerMarkerSelection(playerName string, playerNumber str
 	}
 	selection := ui.Input.ReadStringOfLengthWithDefault(1, def)
 	return selection
+}
+
+func (ui ConsoleUI) GetPlayAgainSelection() bool {
+	ui.Output.Write(PlayAgainSelectMessage)
+	selection := strings.ToLower(ui.Input.ReadStringOfLengthWithDefault(1, "n"))
+	return selection == "y"
 }

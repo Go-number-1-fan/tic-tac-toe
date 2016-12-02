@@ -28,6 +28,7 @@ const (
 
 	NameSelectMessage       string = "Please Select a Name for Player"
 	MarkerSelectMessage     string = "Please Select a Marker for "
+	PlayAgainSelectMessage  string = "Would you like to play again? (y | n):"
 	PlayerTypeSelectMessage string = "Please Select a Player Type:\n" +
 		"\t1. Human Player\n" +
 		"\t2. Easy Computer Player\n" +
