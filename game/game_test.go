@@ -117,8 +117,6 @@ func TestGame_CanGetTheCurrentPlayersMarker_ForO(t *testing.T) {
 	assert.Equal(t, O, game.getCurrentPlayerMarker())
 }
 
-// Computer Test
-
 func TestGame_CanTakeATurnWithAComputer(t *testing.T) {
 	board := Board{
 		X, O, X,
@@ -131,4 +129,36 @@ func TestGame_CanTakeATurnWithAComputer(t *testing.T) {
 	game := CreateGame(MockUI{1}, board, secondPlayer, firstPlayer, StandardReferee{})
 	updatedGame := game.takeTurn()
 	assert.True(t, updatedGame.board[5] == O || updatedGame.board[8] == O)
+}
+
+func TestGame_CanPlayAnEntireGameWithComputers(t *testing.T) {
+	board := Board{
+		E, E, E,
+		E, E, E,
+		E, E, E,
+	}
+	firstPlayer := EasyComputerPlayer{"X", "Computer1"}
+	secondPlayer := EasyComputerPlayer{"O", "Computer2"}
+
+	game := CreateGame(MockUI{1}, board, firstPlayer, secondPlayer, StandardReferee{})
+	updatedGame := game.PlayGame()
+	assert.NotEqual(t, Continue, updatedGame.status)
+}
+
+func TestGame_CanResetTheGameToPlayAgain(t *testing.T) {
+	board := Board{
+		E, E, E,
+		E, E, E,
+		E, E, E,
+	}
+	firstPlayer := EasyComputerPlayer{"X", "Computer1"}
+	secondPlayer := EasyComputerPlayer{"O", "Computer2"}
+
+	game := CreateGame(MockUI{1}, board, firstPlayer, secondPlayer, StandardReferee{})
+	updatedGame := game.PlayGame()
+	assert.NotEqual(t, Continue, updatedGame.status)
+	assert.True(t, len(updatedGame.board.EmptySpots()) < 6)
+	clearedGame := updatedGame.ResetGame()
+	assert.Equal(t, Continue, clearedGame.status)
+	assert.Equal(t, 9, len(clearedGame.board.EmptySpots()))
 }
