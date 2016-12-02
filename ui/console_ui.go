@@ -53,6 +53,10 @@ func getBoardRowString(stringBoard []string, boardRowStartIndex int, rowLength i
 	return boardRow
 }
 
+func getStringWithColor(str string, color string) string {
+	return color + str + DefaultPlayerColorClose
+}
+
 func getDisplayBoard(board Board, player1Marker string, player2Marker string) string {
 	rowLength := board.RowLength()
 	charsPerRow := getCharsPerRow(rowLength)
@@ -69,7 +73,9 @@ func getDisplayBoard(board Board, player1Marker string, player2Marker string) st
 
 func (ui ConsoleUI) DisplayBoard(board Board, player1Marker string, player2Marker string) {
 	ui.Clear()
-	ui.Output.Write(getDisplayBoard(board, player1Marker, player2Marker))
+	coloredPlayer1Marker := getStringWithColor(player1Marker, DefaultPlayer1Color)
+	coloredPlayer2Marker := getStringWithColor(player2Marker, DefaultPlayer2Color)
+	ui.Output.Write(getDisplayBoard(board, coloredPlayer1Marker, coloredPlayer2Marker))
 }
 
 func getHumanSelectMessage(marker string) string {

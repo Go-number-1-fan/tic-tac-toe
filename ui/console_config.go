@@ -1,11 +1,15 @@
 package ui
 
 const (
-	DefaultPlayerName    string = "Player"
-	DefaultMaxNameLength int    = 15
-	DefaultPlayer1Marker string = "X"
-	DefaultPlayer2Marker string = "O"
+	DefaultPlayer1Color     string = "\x1b[31m"
+	DefaultPlayer2Color     string = "\x1b[32m"
+	DefaultPlayerColorClose string = "\x1b[0m"
+	DefaultPlayerName       string = "Player"
+	DefaultMaxNameLength    int    = 15
+	DefaultPlayer1Marker    string = "X"
+	DefaultPlayer2Marker    string = "O"
 )
+
 const (
 	WelcomeMessage          string = "Welcome To Tic Tac Toe!\nFollow the instructions and enter requested information when prompted!\n\nMost Importantly... Have fun!\n\n"
 	ComputerThinkingMessage string = " is Thinking...\n"
