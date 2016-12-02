@@ -10,7 +10,7 @@ type UI interface {
 	DisplayWinMessage(winner string)
 	GetValidMove(board Board, marker string) int
 	GetPlayerNameSelection(playerNumber string) string
-	GetPlayerTypeSelection(playerName string) PlayerTypeSelection
+	GetPlayerTypeSelection(playerName string, playerMarker string) PlayerTypeSelection
 	GetPlayerMarkerSelection(playerName string, playerNumber string) string
 	GetPlayAgainSelection() bool
 }

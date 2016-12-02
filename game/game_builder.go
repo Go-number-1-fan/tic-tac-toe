@@ -19,7 +19,7 @@ func (builder GameBuilder) BuildGame() Game {
 func (builder GameBuilder) getPlayer(playerNumber string) Player {
 	playerNameSelection := builder.UI.GetPlayerNameSelection(playerNumber)
 	playerMarkerSelection := builder.UI.GetPlayerMarkerSelection(playerNameSelection, playerNumber)
-	playerTypeSelection := builder.UI.GetPlayerTypeSelection(playerNameSelection)
+	playerTypeSelection := builder.UI.GetPlayerTypeSelection(playerNameSelection, playerMarkerSelection)
 	switch playerTypeSelection {
 	case HumanSelected:
 		return HumanPlayer{playerMarkerSelection, playerNameSelection}
