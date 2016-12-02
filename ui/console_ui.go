@@ -63,6 +63,7 @@ func getDisplayBoard(board Board, player1Marker string, player2Marker string) st
 		boardString = boardString + getBoardRowString(stringBoard, rowStartIndex, rowLength) + NewLineString
 		rowStartIndex = rowStartIndex + rowLength
 	}
+	boardString = boardString + getHorizontalDividerString(charsPerRow) + NewLineString + NewLineString
 	return boardString
 }
 
@@ -111,7 +112,7 @@ func (ui ConsoleUI) GetPlayerTypeSelection(playerName string, playerMarker strin
 }
 
 func (ui ConsoleUI) GetPlayerNameSelection(playerNumber string) string {
-	nameSelectionMessage := NewLineString + NameSelectMessage + playerNumber + ":" + NewLineString
+	nameSelectionMessage := NameSelectMessage + playerNumber + ":" + NewLineString
 	ui.Output.Write(nameSelectionMessage)
 	selection := ui.Input.ReadStringOfLengthWithDefault(DefaultMaxNameLength, DefaultPlayerName+playerNumber)
 	return selection

@@ -5,6 +5,7 @@ import . "github.com/go-number-1-fan/tic-tac-toe/game"
 
 func main() {
 	ui := CreateConsoleUI(ConsoleInput{}, ConsoleOutput{})
+	ui.Clear()
 	ui.DisplayWelcomeMessage()
 
 	gameBuilder := GameBuilder{ui}
