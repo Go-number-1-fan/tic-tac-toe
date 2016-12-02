@@ -12,5 +12,10 @@ func main() {
 	gameBuilder := GameBuilder{ui, ref}
 	game := gameBuilder.BuildGame()
 
-	game.PlayGame()
+	playAgain := true
+	for playAgain {
+		game.PlayGame()
+		playAgain = ui.GetPlayAgainSelection()
+		game = game.ResetGame()
+	}
 }

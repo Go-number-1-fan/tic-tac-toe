@@ -25,6 +25,14 @@ func CreateGame(ui UI, board Board, player1 Player, player2 Player, referee Refe
 	return game
 }
 
+func (game Game) ResetGame() Game {
+	game.status = Continue
+	player2, player1 := game.getPlayersInOrder()
+	game.players = []Player{player1, player2}
+	game.board = EmptyBoard()
+	return game
+}
+
 func (game Game) PlayGame() Game {
 	for game.status == Continue {
 		game = game.takeTurn()
