@@ -17,7 +17,6 @@ The Game of Tic Tac Toe, written in Go.
 [Follow Instructions Here] (https://golang.org/doc/install)
 
 ## Set up $GOPATH
-* GoPath is a directory that contains a `bin/` `src/` `pkg/` folder, all projects you get or dependencies a project has are installed here. Simply create a directory and set it to whatever you want.
 * EXAMPLE: `export GOPATH=$HOME/GoOut`
 * `export GOPATH=$HOME/{YOUR_GOPATH_HERE}`
 * Add the above line to your `.bash_profile` or `.zhsrc` otherwise it will only work in the current session
