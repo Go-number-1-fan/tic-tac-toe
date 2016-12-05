@@ -16,90 +16,74 @@ func TestHardComputerPlayer_CanReturnAValidName(t *testing.T) {
 	assert.Equal(t, player.GetName(), "Computer")
 }
 
-func TestHardComputerPlayer_CanTakeTheCornerOfAnOpenBoard(t *testing.T) {
-	player := HardComputerPlayer{"X", "Computer", StandardReferee{}}
-	board := Board{
-		E, E, E,
-		E, E, E,
-		E, E, E}
-
-	computerMove := player.GetMove(board, MockUI{-1})
-	assert.Equal(t, 0, computerMove)
+func TestHardComputerPlayer_NeverLosesAGame_StandardRef_GoingSecond(t *testing.T) {
+	board := EmptyBoard()
+	computer := CreateHardComputerPlayer("O", "Computer", StandardReferee{})
+	playerWon := playAllGamesVsComputer(board, X, computer, false, t)
+	assert.False(t, playerWon)
 }
 
-func TestHardComputerPlayer_CanWinGivenTheChance(t *testing.T) {
-	player := HardComputerPlayer{"X", "Computer", StandardReferee{}}
-	board := Board{
-		X, X, E,
-		E, O, E,
-		E, O, E}
-
-	computerMove := player.GetMove(board, MockUI{-1})
-	assert.Equal(t, 2, computerMove)
+func TestHardComputerPlayer_NeverLosesAGame_StandardRef_GoingFirst(t *testing.T) {
+	board := EmptyBoard()
+	computer := CreateHardComputerPlayer("O", "Computer", StandardReferee{})
+	board = board.MakeMove(computer.GetMove(board, MockUI{-1}), X)
+	playerWon := playAllGamesVsComputer(board, O, computer, false, t)
+	assert.False(t, playerWon)
 }
 
-func TestHardComputerPlayer_CanBlockAWinGivenTheChance(t *testing.T) {
-	player := HardComputerPlayer{"X", "Computer", StandardReferee{}}
-	board := Board{
-		O, O, E,
-		E, X, E,
-		E, X, E}
-
-	computerMove := player.GetMove(board, MockUI{-1})
-	assert.Equal(t, 2, computerMove)
+func TestHardComputerPlayer_NeverLosesAGame_CornerRef_GoingSecond(t *testing.T) {
+	board := EmptyBoard()
+	computer := CreateHardComputerPlayer("O", "Computer", CornerReferee{})
+	playerWon := playAllGamesVsComputer(board, X, computer, false, t)
+	assert.False(t, playerWon)
 }
 
-func TestHardComputerPlayer_CanTakeTheMiddleIfITakeACorner(t *testing.T) {
-	player := HardComputerPlayer{"O", "Computer", StandardReferee{}}
-	board := Board{
-		X, E, E,
-		E, E, E,
-		E, E, E}
-
-	computerMove := player.GetMove(board, MockUI{-1})
-	assert.Equal(t, 4, computerMove)
+func TestHardComputerPlayer_NeverLosesAGame_CornerRef_GoingFirst(t *testing.T) {
+	board := EmptyBoard()
+	computer := CreateHardComputerPlayer("O", "Computer", CornerReferee{})
+	board = board.MakeMove(computer.GetMove(board, MockUI{-1}), X)
+	playerWon := playAllGamesVsComputer(board, O, computer, false, t)
+	assert.False(t, playerWon)
 }
 
-func TestHardComputerPlayer_TakesTheLastSpotOnAnAlmostFullBoard(t *testing.T) {
-	player := HardComputerPlayer{"X", "Computer", StandardReferee{}}
-	board := Board{
-		X, O, X,
-		X, O, O,
-		O, X, E}
+func playAllGamesVsComputer(board Board, currentMarker Marker, computer HardComputerPlayer, computerP1 bool, t *testing.T) bool {
+	playerWon := false
+	currentGameStatus := computer.Referee.GetGameStatus(board)
 
-	computerMove := player.GetMove(board, MockUI{-1})
-	assert.Equal(t, 8, computerMove)
-}
-
-func TestHardComputerPlayer_CornerReferee_TakesACornerOnAnOpenBoard(t *testing.T) {
-	player := HardComputerPlayer{"X", "Computer", CornerReferee{}}
-	board := Board{
-		E, E, E,
-		E, E, E,
-		E, E, E}
-
-	computerMove := player.GetMove(board, MockUI{-1})
-	assert.Equal(t, 0, computerMove)
-}
-
-func TestHardComputerPlayer_CornerReferee_StopsAWin(t *testing.T) {
-	player := HardComputerPlayer{"O", "Computer", CornerReferee{}}
-	board := Board{
-		X, E, O,
-		E, E, E,
-		X, E, E}
-
-	computerMove := player.GetMove(board, MockUI{-1})
-	assert.Equal(t, 8, computerMove)
-}
-
-func TestHardComputerPlayer_CornerReferee_WinsIfItCan(t *testing.T) {
-	player := HardComputerPlayer{"O", "Computer", CornerReferee{}}
-	board := Board{
-		X, E, O,
-		X, E, X,
-		O, E, E}
-
-	computerMove := player.GetMove(board, MockUI{-1})
-	assert.Equal(t, 8, computerMove)
+	switch currentGameStatus {
+	case WinP1:
+		return !computerP1
+	case WinP2:
+		return computerP1
+	case Tie:
+		return false
+	default:
+		nextMarker := flipMarker(currentMarker)
+		if computerP1 {
+			if currentMarker == X {
+				computerMove := computer.GetMove(board, MockUI{-1})
+				updatedBoard := append(Board(nil), board...).MakeMove(computerMove, currentMarker)
+				playerWon = playerWon || playAllGamesVsComputer(updatedBoard, nextMarker, computer, computerP1, t)
+			} else {
+				emptySpots := board.EmptySpots()
+				for _, emptySpot := range emptySpots {
+					updatedBoard := append(Board(nil), board...).MakeMove(emptySpot, currentMarker)
+					playerWon = playerWon || playAllGamesVsComputer(updatedBoard, nextMarker, computer, computerP1, t)
+				}
+			}
+		} else {
+			if currentMarker == X {
+				emptySpots := board.EmptySpots()
+				for _, emptySpot := range emptySpots {
+					updatedBoard := append(Board(nil), board...).MakeMove(emptySpot, currentMarker)
+					playerWon = playerWon || playAllGamesVsComputer(updatedBoard, nextMarker, computer, computerP1, t)
+				}
+			} else {
+				computerMove := computer.GetMove(board, MockUI{-1})
+				updatedBoard := append(Board(nil), board...).MakeMove(computerMove, currentMarker)
+				playerWon = playerWon || playAllGamesVsComputer(updatedBoard, nextMarker, computer, computerP1, t)
+			}
+		}
+	}
+	return playerWon
 }
