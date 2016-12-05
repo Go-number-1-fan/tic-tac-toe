@@ -1,7 +1,9 @@
 package ui
 
-import "github.com/stretchr/testify/assert"
-import "testing"
+import (
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
 func TestConsoleInput_CanConvertAStringToANumAndTellIfError(t *testing.T) {
 	num, anyError := convertStringToInt("123")

@@ -1,11 +1,13 @@
 package game
 
-import "github.com/stretchr/testify/assert"
-import . "github.com/go-number-1-fan/tic-tac-toe/board"
-import . "github.com/go-number-1-fan/tic-tac-toe/player"
-import . "github.com/go-number-1-fan/tic-tac-toe/referee"
-import . "github.com/go-number-1-fan/tic-tac-toe/ui"
-import "testing"
+import (
+	. "github.com/go-number-1-fan/tic-tac-toe/board"
+	. "github.com/go-number-1-fan/tic-tac-toe/player"
+	. "github.com/go-number-1-fan/tic-tac-toe/referee"
+	. "github.com/go-number-1-fan/tic-tac-toe/ui"
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
 func TestGame_HasABoard(t *testing.T) {
 	assert.Equal(t, EmptyBoard(), CreateGame(MockUI{0}, EmptyBoard(), MockPlayer{"X", "Player1", 0}, MockPlayer{"O", "Player2", 1}, MockReferee{Continue}).board)

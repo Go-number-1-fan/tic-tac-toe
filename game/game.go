@@ -1,9 +1,11 @@
 package game
 
-import . "github.com/go-number-1-fan/tic-tac-toe/board"
-import . "github.com/go-number-1-fan/tic-tac-toe/player"
-import . "github.com/go-number-1-fan/tic-tac-toe/referee"
-import . "github.com/go-number-1-fan/tic-tac-toe/ui"
+import (
+	. "github.com/go-number-1-fan/tic-tac-toe/board"
+	. "github.com/go-number-1-fan/tic-tac-toe/player"
+	. "github.com/go-number-1-fan/tic-tac-toe/referee"
+	. "github.com/go-number-1-fan/tic-tac-toe/ui"
+)
 
 type Game struct {
 	ui      UI

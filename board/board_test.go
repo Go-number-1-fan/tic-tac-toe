@@ -1,7 +1,9 @@
 package board
 
-import "github.com/stretchr/testify/assert"
-import "testing"
+import (
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
 func TestEmptyBoard_HasALenghtOfNine(t *testing.T) {
 	board := EmptyBoard()

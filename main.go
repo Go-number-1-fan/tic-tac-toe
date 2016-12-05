@@ -1,7 +1,9 @@
 package main
 
-import . "github.com/go-number-1-fan/tic-tac-toe/ui"
-import . "github.com/go-number-1-fan/tic-tac-toe/game"
+import (
+	. "github.com/go-number-1-fan/tic-tac-toe/game"
+	. "github.com/go-number-1-fan/tic-tac-toe/ui"
+)
 
 func main() {
 	ui := CreateConsoleUI(ConsoleInput{}, ConsoleOutput{})

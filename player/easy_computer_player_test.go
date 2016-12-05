@@ -1,9 +1,11 @@
 package player
 
-import "github.com/stretchr/testify/assert"
-import . "github.com/go-number-1-fan/tic-tac-toe/board"
-import . "github.com/go-number-1-fan/tic-tac-toe/ui"
-import "testing"
+import (
+	. "github.com/go-number-1-fan/tic-tac-toe/board"
+	. "github.com/go-number-1-fan/tic-tac-toe/ui"
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
 func TestEasyComputerPlayer_CanReturnAValidMove(t *testing.T) {
 	player := EasyComputerPlayer{"X", "Computer"}

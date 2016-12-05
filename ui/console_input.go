@@ -1,9 +1,11 @@
 package ui
 
-import "bufio"
-import "os"
-import "strconv"
-import "strings"
+import (
+	"bufio"
+	"os"
+	"strconv"
+	"strings"
+)
 
 type ConsoleInput struct{}
 

@@ -1,7 +1,9 @@
 package ui
 
-import "time"
-import "strings"
+import (
+	"strings"
+	"time"
+)
 
 type ConsoleUI struct {
 	Input     Input

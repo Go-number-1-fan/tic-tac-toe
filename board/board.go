@@ -1,7 +1,9 @@
 package board
 
-import "math"
-import "strconv"
+import (
+	"math"
+	"strconv"
+)
 
 type Board []Marker
 

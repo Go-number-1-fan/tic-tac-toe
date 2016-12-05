@@ -1,10 +1,12 @@
 package game
 
-import "github.com/stretchr/testify/assert"
-import . "github.com/go-number-1-fan/tic-tac-toe/ui"
-import . "github.com/go-number-1-fan/tic-tac-toe/player"
-import . "github.com/go-number-1-fan/tic-tac-toe/referee"
-import "testing"
+import (
+	. "github.com/go-number-1-fan/tic-tac-toe/player"
+	. "github.com/go-number-1-fan/tic-tac-toe/referee"
+	. "github.com/go-number-1-fan/tic-tac-toe/ui"
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
 func TestGameBuilder_CanCreateAGameWithOneHumanPlayer(t *testing.T) {
 	gameBuilder := GameBuilder{MockUI{1}}

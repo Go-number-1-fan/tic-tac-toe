@@ -1,9 +1,11 @@
 package ui
 
-import "github.com/stretchr/testify/assert"
-import . "github.com/go-number-1-fan/tic-tac-toe/board"
-import "strings"
-import "testing"
+import (
+	. "github.com/go-number-1-fan/tic-tac-toe/board"
+	"github.com/stretchr/testify/assert"
+	"strings"
+	"testing"
+)
 
 func TestConsoleUI_CanGetTheNumberOfCharactersPerRow(t *testing.T) {
 	assert.Equal(t, 13, getCharsPerRow(3))

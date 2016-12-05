@@ -1,9 +1,11 @@
 package player
 
-import . "github.com/go-number-1-fan/tic-tac-toe/board"
-import . "github.com/go-number-1-fan/tic-tac-toe/ui"
-import "math/rand"
-import "time"
+import (
+	. "github.com/go-number-1-fan/tic-tac-toe/board"
+	. "github.com/go-number-1-fan/tic-tac-toe/ui"
+	"math/rand"
+	"time"
+)
 
 type EasyComputerPlayer struct {
 	Marker string

@@ -1,10 +1,12 @@
 package player
 
-import "github.com/stretchr/testify/assert"
-import . "github.com/go-number-1-fan/tic-tac-toe/board"
-import . "github.com/go-number-1-fan/tic-tac-toe/ui"
-import . "github.com/go-number-1-fan/tic-tac-toe/referee"
-import "testing"
+import (
+	. "github.com/go-number-1-fan/tic-tac-toe/board"
+	. "github.com/go-number-1-fan/tic-tac-toe/referee"
+	. "github.com/go-number-1-fan/tic-tac-toe/ui"
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
 func TestHardComputerPlayer_CanReturnAValidMarker(t *testing.T) {
 	player := CreateHardComputerPlayer("X", "Computer", StandardReferee{})
@@ -27,7 +29,7 @@ func TestHardComputerPlayer_NeverLosesAGame_StandardRef_GoingFirst(t *testing.T)
 	board := EmptyBoard()
 	computer := CreateHardComputerPlayer("O", "Computer", StandardReferee{})
 	board = board.MakeMove(computer.GetMove(board, MockUI{-1}), X)
-	playerWon := playAllGamesVsComputer(board, O, computer, false, t)
+	playerWon := playAllGamesVsComputer(board, O, computer, true, t)
 	assert.False(t, playerWon)
 }
 
@@ -42,7 +44,7 @@ func TestHardComputerPlayer_NeverLosesAGame_CornerRef_GoingFirst(t *testing.T) {
 	board := EmptyBoard()
 	computer := CreateHardComputerPlayer("O", "Computer", CornerReferee{})
 	board = board.MakeMove(computer.GetMove(board, MockUI{-1}), X)
-	playerWon := playAllGamesVsComputer(board, O, computer, false, t)
+	playerWon := playAllGamesVsComputer(board, O, computer, true, t)
 	assert.False(t, playerWon)
 }
 
@@ -69,6 +71,7 @@ func playAllGamesVsComputer(board Board, currentMarker Marker, computer HardComp
 				for _, emptySpot := range emptySpots {
 					updatedBoard := append(Board(nil), board...).MakeMove(emptySpot, currentMarker)
 					playerWon = playerWon || playAllGamesVsComputer(updatedBoard, nextMarker, computer, computerP1, t)
+					updatedBoard = updatedBoard.MakeMove(emptySpot, E)
 				}
 			}
 		} else {
@@ -77,6 +80,7 @@ func playAllGamesVsComputer(board Board, currentMarker Marker, computer HardComp
 				for _, emptySpot := range emptySpots {
 					updatedBoard := append(Board(nil), board...).MakeMove(emptySpot, currentMarker)
 					playerWon = playerWon || playAllGamesVsComputer(updatedBoard, nextMarker, computer, computerP1, t)
+					updatedBoard = updatedBoard.MakeMove(emptySpot, E)
 				}
 			} else {
 				computerMove := computer.GetMove(board, MockUI{-1})

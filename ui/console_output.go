@@ -1,9 +1,11 @@
 package ui
 
-import "fmt"
-import "runtime"
-import "os"
-import "os/exec"
+import (
+	"fmt"
+	"os"
+	"os/exec"
+	"runtime"
+)
 
 type ConsoleOutput struct{}
 

@@ -1,7 +1,9 @@
 package ui
 
-import "github.com/stretchr/testify/assert"
-import "testing"
+import (
+	"github.com/stretchr/testify/assert"
+	"testing"
+)
 
 func TestValidator_ChecksWhetherTheValueIsInTheGivenAllowedValues_WhenItIsValid(t *testing.T) {
 	validator := ConsoleInputValidator{}
