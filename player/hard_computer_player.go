@@ -28,8 +28,38 @@ func (computer HardComputerPlayer) GetName() string {
 }
 
 func (computer HardComputerPlayer) GetMove(board Board, ui UI) int {
+	var scoredSpots []ScoredSpot
+	var depth int
 	ui.DisplayComputerThinkingMessage(computer.Name)
-	return computer.scoreSpot(board, getCurrentMarker(board), 0)
+	channel := make(chan ScoredSpot)
+
+	emptySpots := board.EmptySpots()
+	for _, emptySpot := range emptySpots {
+		go func(emptySpot int) {
+			currentMarker := getCurrentMarker(board)
+			boardCopy := append(Board(nil), board...)
+			boardCopy = boardCopy.MakeMove(emptySpot, currentMarker)
+			nextMarker := flipMarker(currentMarker)
+			computer.channelNegamax(emptySpot, boardCopy, nextMarker, depth+1, channel)
+			boardCopy[emptySpot] = E
+		}(emptySpot)
+	}
+
+	for range board.EmptySpots() {
+		scoredSpot := <-channel
+		scoredSpots = append(scoredSpots, scoredSpot)
+	}
+
+	maxSpot, _ := getMaxs(scoredSpots)
+
+	return maxSpot
+}
+
+func (computer HardComputerPlayer) channelNegamax(originalSpot int, board Board, currentMarker Marker, depth int, c chan ScoredSpot) {
+	var scoredSpot ScoredSpot
+	scoredSpot.Spot = originalSpot
+	scoredSpot.Score = -1 * computer.scoreSpot(board, currentMarker, depth)
+	c <- scoredSpot
 }
 
 func (computer HardComputerPlayer) scoreSpot(board Board, currentMarker Marker, depth int) int {
@@ -53,16 +83,11 @@ func (computer HardComputerPlayer) scoreSpot(board Board, currentMarker Marker, 
 			board[emptySpot] = E
 		}
 	}
-	maxSpot, maxScore := getMaxs(scoredSpots)
-	if depth == 0 {
-		return maxSpot
-	} else {
-		return maxScore
-	}
+	_, maxScore := getMaxs(scoredSpots)
+	return maxScore
 }
 
 func flipMarker(currentMarker Marker) Marker {
-
 	if currentMarker == X {
 		return O
 	} else {
