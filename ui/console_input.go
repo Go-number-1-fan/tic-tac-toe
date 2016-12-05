@@ -3,7 +3,6 @@ package ui
 import "bufio"
 import "os"
 import "strconv"
-import "fmt"
 import "strings"
 
 type ConsoleInput struct{}
@@ -22,7 +21,7 @@ func convertStringToInt(stringNum string) (int, bool) {
 	return number, hasError
 }
 
-func (input ConsoleInput) ReadInt() int {
+func (input ConsoleInput) ReadInt(out Output) int {
 	var number int
 	var hasReadError, hasParseError bool
 	var line string
@@ -32,7 +31,7 @@ func (input ConsoleInput) ReadInt() int {
 		number, hasParseError = convertStringToInt(line)
 		hasError = hasReadError || hasParseError
 		if hasError {
-			fmt.Println(NotANumberMessage)
+			out.Write(NotANumberMessage)
 		}
 	}
 	return number

@@ -5,7 +5,7 @@ type MockInput struct {
 	MockConsoleStringInput string
 }
 
-func (input MockInput) ReadInt() int {
+func (input MockInput) ReadInt(out Output) int {
 	return input.MockConsoleIntInput
 }
 

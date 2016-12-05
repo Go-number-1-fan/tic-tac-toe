@@ -58,22 +58,22 @@ func getHumanSelectMessage(marker string) string {
 func (ui ConsoleUI) GetValidMove(openSpots []int, marker string) int {
 	selectMessage := getHumanSelectMessage(marker)
 	ui.Output.Write(selectMessage)
-	selected := ui.Input.ReadInt()
+	selected := ui.Input.ReadInt(ui.Output)
 	for !ui.Validator.IsValid(selected-1, openSpots) {
 		ui.Output.Write(NotValidMessage)
 		ui.Output.Write(selectMessage)
-		selected = ui.Input.ReadInt()
+		selected = ui.Input.ReadInt(ui.Output)
 	}
 	return selected - 1
 }
 
 func (ui ConsoleUI) GetRefereeSelection() RefereeTypeSelection {
 	ui.Output.Write(RefereeSelectMessage)
-	selected := ui.Input.ReadInt()
+	selected := ui.Input.ReadInt(ui.Output)
 	for !ui.Validator.IsValid(selected, []int{1, 2}) {
 		ui.Output.Write(RefereeSelectMessage)
 		ui.Output.Write(NotValidMessage)
-		selected = ui.Input.ReadInt()
+		selected = ui.Input.ReadInt(ui.Output)
 	}
 	return RefereeTypeSelection(selected)
 }
@@ -81,11 +81,11 @@ func (ui ConsoleUI) GetRefereeSelection() RefereeTypeSelection {
 func (ui ConsoleUI) GetPlayerTypeSelection(playerName string, playerMarker string) PlayerTypeSelection {
 	ui.Output.Write(NewLineString + NewLineString + playerName + VerticalDividerString + playerMarker + NewLineString)
 	ui.Output.Write(PlayerTypeSelectMessage)
-	selected := ui.Input.ReadInt()
+	selected := ui.Input.ReadInt(ui.Output)
 	for !ui.Validator.IsValid(selected, []int{1, 2, 3}) {
 		ui.Output.Write(PlayerTypeSelectMessage)
 		ui.Output.Write(NotValidMessage)
-		selected = ui.Input.ReadInt()
+		selected = ui.Input.ReadInt(ui.Output)
 	}
 	return PlayerTypeSelection(selected)
 }
