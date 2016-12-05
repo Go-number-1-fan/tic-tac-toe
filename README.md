@@ -7,10 +7,16 @@ The Game of Tic Tac Toe, written in Go.
 
 * Custom Names with Custom Messages!
 * X and O? More Like X and No! Express yourself by picking your own Marker!
-* 3 Types of Players to play as or against!
+* Three Types of Players to play as or against!
+* Two Rulesets for maximum variety in gameplay!
 * Fully open source code with active and friendly developer -- Feel free to open a pull request!
 
 # Setup
+
+## Notes
+* You do not need to `git clone` this repository, `go get {repository}` effectively clones it to your $GOPATH
+* some commands use `./...` that is 3 dots, and is a go exclusive way of saying this directory and all subdirectories
+* Any issues in project setup can be addressed to Tom via slack | email, he's more than happy to help!
 
 ## Requirements
 
@@ -26,9 +32,9 @@ The Game of Tic Tac Toe, written in Go.
 [Follow Instructions Here] (https://golang.org/doc/install)
 
 ## Set up $GOPATH
-* EXAMPLE: `export GOPATH=$HOME/GoOut`
 * `export GOPATH=$HOME/{YOUR_GOPATH_HERE}`
-* Add the above line to your `.bash_profile` or `.zshrc` otherwise it will only work in the current session
+* EXAMPLE: `export GOPATH=$HOME/GoOut`
+* *Note*: Add setting your $GOPATH to your `.bash_profile` or `.zshrc` otherwise it will only work in the current session
 
 ## Get the Project
 `go get github.com/go-number-1-fan/tic-tac-toe`
