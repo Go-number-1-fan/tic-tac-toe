@@ -3,7 +3,7 @@ package ui
 type UI interface {
 	DisplayBoard(board []string, player1Marker string, player2Marker string)
 	DisplayTieMessage()
-	DisplayComputerThinkingMessage(computerName string)
+	DisplayComputerThinkingMessage(computerName string, wait bool)
 	DisplayWelcomeMessage()
 	DisplayWinMessage(winner string)
 	GetValidMove(openSpots []int, marker string) int

@@ -16,7 +16,7 @@ func (computer EasyComputerPlayer) GetMove(board Board, ui UI) int {
 	emptySpots := board.EmptySpots()
 	rand.Seed(int64(time.Now().UnixNano()))
 	emptySpotSelection := rand.Intn(len(emptySpots))
-	ui.DisplayComputerThinkingMessage(computer.Name)
+	ui.DisplayComputerThinkingMessage(computer.Name, true)
 	return emptySpots[emptySpotSelection]
 }
 

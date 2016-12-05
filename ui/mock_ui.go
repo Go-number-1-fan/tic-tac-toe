@@ -6,7 +6,7 @@ type MockUI struct {
 
 func (ui MockUI) DisplayWelcomeMessage() {}
 
-func (ui MockUI) DisplayComputerThinkingMessage(computerName string) {}
+func (ui MockUI) DisplayComputerThinkingMessage(computerName string, wait bool) {}
 
 func (ui MockUI) GetValidMove(openSpots []int, marker string) int {
 	return ui.MockUserInput

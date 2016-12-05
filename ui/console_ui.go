@@ -23,9 +23,11 @@ func (ui ConsoleUI) DisplayTieMessage() {
 	ui.Output.Write(TieMessage)
 }
 
-func (ui ConsoleUI) DisplayComputerThinkingMessage(computerName string) {
+func (ui ConsoleUI) DisplayComputerThinkingMessage(computerName string, wait bool) {
 	ui.Output.Write(computerName + ComputerThinkingMessage)
-	time.Sleep(2 * time.Second)
+	if wait {
+		time.Sleep(2 * time.Second)
+	}
 }
 
 func (ui ConsoleUI) DisplayWinMessage(winner string) {

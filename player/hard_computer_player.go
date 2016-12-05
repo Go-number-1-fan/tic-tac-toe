@@ -32,7 +32,11 @@ func (computer HardComputerPlayer) GetName() string {
 func (computer HardComputerPlayer) GetMove(board Board, ui UI) int {
 	var scoredSpots []ScoredSpot
 	var depth int
-	ui.DisplayComputerThinkingMessage(computer.Name)
+	wait := true
+	if board.CountOccupiedSpots() == 0 {
+		wait = false
+	}
+	ui.DisplayComputerThinkingMessage(computer.Name, wait)
 	channel := make(chan ScoredSpot)
 
 	emptySpots := board.EmptySpots()
